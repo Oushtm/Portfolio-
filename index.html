@@ -692,25 +692,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
 
-                <form action="https://formsubmit.co/oussamahatim2006@gmail.com" method="POST" class="contact__form" id="contactForm">
-                    <!-- Honeypot -->
-                    <input type="text" name="_honey" style="display: none">
-                    <!-- Disable Captcha -->
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio">
-                    <input type="hidden" name="_next" value="https://oushtm.github.io/portfolio-responsive-complete/#contact">
+                <form class="contact__form" id="contactForm">
                     <div class="contact__form-group">
-                        <input type="text" name="name" placeholder="Your Name" class="contact__input" required>
+                        <input type="text" name="name" id="name" placeholder="Your Name" class="contact__input" required>
                     </div>
                     <div class="contact__form-group">
-                        <input type="email" name="email" placeholder="Your Email" class="contact__input" required>
+                        <input type="email" name="email" id="email" placeholder="Your Email" class="contact__input" required>
                     </div>
                     <div class="contact__form-group">
-                        <input type="text" name="subject" placeholder="Subject" class="contact__input" required>
+                        <input type="text" name="subject" id="subject" placeholder="Subject" class="contact__input" required>
                     </div>
                     <div class="contact__form-group">
-                        <textarea name="message" placeholder="Your Message" class="contact__input" rows="6" required></textarea>
+                        <textarea name="message" id="message" placeholder="Your Message" class="contact__input" rows="6" required></textarea>
                     </div>
                     <div class="contact__form-group">
                         <button type="submit" class="contact__button button">Send Message</button>
@@ -748,6 +741,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     <!--===== SCROLL REVEAL =====-->
     <script src="https://unpkg.com/scrollreveal"></script>
+
+    <!-- Add EmailJS SDK -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Initialize EmailJS with your public key
+            emailjs.init('XxDuAgZHOE5q2RnOX');
+        })();
+    </script>
 
     <!--===== MAIN JS =====-->
     <script>
@@ -882,14 +884,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-        // Don't prevent form submission - let FormSubmit handle it
+        e.preventDefault();
+        
         // Show loading state
         const submitButton = this.querySelector('button[type="submit"]');
+        const originalButtonText = submitButton.innerHTML;
         submitButton.innerHTML = 'Sending...';
         submitButton.disabled = true;
-        
-        // Show thank you modal
-        document.getElementById('thankYouModal').style.display = 'block';
+
+        // Get form data
+        const templateParams = {
+            from_name: document.getElementById('name').value,
+            from_email: document.getElementById('email').value,
+            subject: document.getElementById('subject').value,
+            message: document.getElementById('message').value,
+            to_name: 'Oussama Hatim'
+        };
+
+        // Send email using EmailJS with your service and template IDs
+        emailjs.send('service_dqjjplm', 'template_xcgobdl', templateParams)
+            .then(function() {
+                // Show success modal
+                document.getElementById('thankYouModal').style.display = 'block';
+                // Reset form
+                document.getElementById('contactForm').reset();
+            }, function(error) {
+                alert('Failed to send message. Please try again.');
+                console.error('EmailJS error:', error);
+            })
+            .finally(function() {
+                // Restore button state
+                submitButton.innerHTML = originalButtonText;
+                submitButton.disabled = false;
+            });
     });
 
     // Close modal when clicking outside
