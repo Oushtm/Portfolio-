@@ -918,118 +918,155 @@ img {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1000;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0, 0, 0, 0.8);
+  z-index: 1000;
 }
 
 .modal__content {
-  background-color: #1e1e1e; /* VS Code-like dark background */
-  margin: 5% auto;
-  padding: 20px;
-  border: 1px solid #333;
-  width: 80%;
-  max-width: 800px;
-  border-radius: 10px;
-  color: #fff;
   position: relative;
+  background-color: #1e1e1e;
+  margin: 2% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 1000px;
+  max-height: 90vh;
+  border-radius: 8px;
+  overflow: auto;
+  color: #fff;
 }
 
 .modal__close {
-  color: #fff;
-  font-size: 28px;
-  font-weight: bold;
   position: absolute;
   right: 20px;
   top: 10px;
+  color: #fff;
+  font-size: 28px;
+  font-weight: bold;
   cursor: pointer;
 }
 
 .modal__close:hover {
-  color: #ccc;
+  color: #ff002b;
 }
 
-.modal__title {
-  font-size: 24px;
-  margin-bottom: 20px;
-}
-
-.modal__body {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.modal__image img {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.modal__description {
-  font-size: 16px;
-  line-height: 1.6;
-}
-
-.modal__code {
-  background-color: #2d2d2d; /* Slightly lighter background for code */
-  padding: 15px;
-  border-radius: 5px;
-  overflow-x: auto;
-}
-
-.modal__code pre {
-  margin: 0;
-}
-
-.modal__code code {
-  font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;
-  color: #d4d4d4; /* Light gray text for code */
-}
-
-
-/* Modal Tabs */
 .modal__tabs {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
+  border-bottom: 1px solid #2d2d2d;
+  padding-bottom: 10px;
 }
 
 .modal__tab {
-  padding: 10px 20px;
-  background-color: #333;
-  color: #fff;
+  background: none;
   border: none;
-  border-radius: 5px;
+  color: #fff;
+  padding: 8px 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
 }
 
 .modal__tab:hover {
-  background-color: #555;
+  background: #2d2d2d;
 }
 
 .modal__tab.active {
-  background-color: #ff002b;
+  background: #ff002b;
+  color: #fff;
 }
 
-/* Code Blocks */
-.modal__code-container {
-  background-color: #2d2d2d;
-  border-radius: 5px;
-  padding: 15px;
+.modal__body {
+  position: relative;
 }
 
 .modal__code {
   display: none;
+  padding: 20px;
+  background: #1e1e1e;
+  border-radius: 4px;
 }
 
 .modal__code.active {
   display: block;
+}
+
+/* Project Description Styles */
+.project-description {
+  color: #fff;
+  line-height: 1.6;
+}
+
+.project-description h2 {
+  color: #ff002b;
+  margin-bottom: 15px;
+}
+
+.project-description h3 {
+  color: #fff;
+  margin: 20px 0 10px;
+}
+
+.project-description p {
+  margin-bottom: 15px;
+}
+
+.project-description ul {
+  list-style-type: none;
+  padding-left: 20px;
+}
+
+.project-description li {
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.project-description li:before {
+  content: "•";
+  color: #ff002b;
+  font-weight: bold;
+  position: absolute;
+  left: -15px;
+}
+
+/* Code Display Styles */
+pre {
+  margin: 0;
+  padding: 15px;
+  border-radius: 4px;
+  background: #1e1e1e !important;
+  max-height: 500px;
+  overflow: auto;
+}
+
+code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .modal__content {
+    width: 95%;
+    margin: 5% auto;
+  }
+
+  .modal__tabs {
+    flex-wrap: wrap;
+  }
+
+  .modal__tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    font-size: 12px;
+  }
 }
 
 /* ===== SERVICES ===== */
@@ -1332,61 +1369,77 @@ html {
     }
 }
 
-/* Mouse Light Effect */
-.mouse-light {
-    position: fixed;
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, 
-        rgba(255,0,43,0.08) 0%,
-        rgba(255,0,43,0.04) 30%,
-        rgba(255,0,43,0) 60%
-    );
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: all 0.1s ease-out;
-    mix-blend-mode: screen;
-    filter: blur(15px);
+/* Last Comment Styles */
+.last-comment {
+    margin-top: 4rem;
+    padding: 2rem;
+    background-color: hsl(var(--hue-color), 0%, 10%);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.mouse-light::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, 
-        rgba(255,0,43,0.05) 0%,
-        rgba(255,0,43,0.02) 30%,
-        rgba(255,0,43,0) 60%
-    );
-    border-radius: 50%;
-    filter: blur(20px);
-    animation: particleTrail 1s ease-out infinite;
+.last-comment__title {
+    color: var(--first-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    text-align: center;
 }
 
-@keyframes particleTrail {
-    0% {
-        transform: scale(1);
-        opacity: 0.5;
-    }
-    100% {
-        transform: scale(2);
-        opacity: 0;
-    }
+.last-comment__content {
+    padding: 1rem;
+    background-color: hsl(var(--hue-color), 0%, 8%);
+    border-radius: 0.5rem;
 }
 
-/* Mobile Touch Effect */
-@media (max-width: 768px) {
-    .mouse-light {
-        width: 150px;
-        height: 150px;
-        opacity: 0;
-        transition: opacity 0.3s ease;
+.last-comment__item {
+    padding: 1rem;
+}
+
+.last-comment__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.last-comment__name {
+    color: var(--first-color);
+    font-weight: var(--font-semi);
+    font-size: 1.1rem;
+}
+
+.last-comment__date {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.last-comment__message {
+    color: var(--text-color);
+    line-height: 1.6;
+    font-size: 1rem;
+    white-space: pre-wrap;
+}
+
+/* Responsive design for last comment */
+@media screen and (max-width: 768px) {
+    .last-comment {
+        margin-top: 3rem;
+        padding: 1.5rem;
     }
 
-    .mouse-light.active {
-        opacity: 1;
+    .last-comment__title {
+        font-size: 1.25rem;
+    }
+
+    .last-comment__name {
+        font-size: 1rem;
+    }
+
+    .last-comment__message {
+        font-size: 0.95rem;
     }
 }

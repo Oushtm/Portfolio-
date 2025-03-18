@@ -219,3 +219,585 @@ document.addEventListener('DOMContentLoaded', function() {
   // Update active states for cursor
   updateTypingState();
 });
+
+// Project Data
+const projectData = {
+    calculator: {
+        description: `
+            <div class="project-description">
+                <h2>Modern Calculator</h2>
+                <p>A modern calculator application built with HTML, CSS, and JavaScript. Features a clean user interface, supports basic arithmetic operations, and includes keyboard input functionality.</p>
+                
+                <h3>Features</h3>
+                <ul>
+                    <li>Basic arithmetic operations (add, subtract, multiply, divide)</li>
+                    <li>Keyboard input support</li>
+                    <li>Responsive design</li>
+                    <li>Clear and elegant UI</li>
+                </ul>
+
+                <h3>Technical Details</h3>
+                <ul>
+                    <li>Built with pure HTML, CSS, and JavaScript</li>
+                    <li>Responsive grid layout</li>
+                    <li>Event handling for both mouse and keyboard</li>
+                    <li>Error handling and input validation</li>
+                </ul>
+            </div>
+        `,
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" readonly>
+        </div>
+        <div class="buttons">
+            <button class="clear">C</button>
+            <button class="operator">%</button>
+            <button class="operator">÷</button>
+            <button class="operator">×</button>
+            <button class="number">7</button>
+            <button class="number">8</button>
+            <button class="number">9</button>
+            <button class="operator">-</button>
+            <button class="number">4</button>
+            <button class="number">5</button>
+            <button class="number">6</button>
+            <button class="operator">+</button>
+            <button class="number">1</button>
+            <button class="number">2</button>
+            <button class="number">3</button>
+            <button class="equals">=</button>
+            <button class="number zero">0</button>
+            <button class="decimal">.</button>
+        </div>
+    </div>
+</body>
+</html>`,
+        css: `/* Calculator Styles */
+:root {
+    --bg-color: #1c1c1c;
+    --display-bg: #333;
+    --btn-bg: #2d2d2d;
+    --btn-hover: #404040;
+    --text-color: #fff;
+    --operator-color: #ff002b;
+    --equals-color: #2ecc71;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+}
+
+.calculator {
+    background: var(--bg-color);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.3);
+}
+
+.display input {
+    width: 100%;
+    height: 60px;
+    background: var(--display-bg);
+    border: none;
+    border-radius: 10px;
+    color: var(--text-color);
+    text-align: right;
+    padding: 0 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+button {
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: var(--btn-bg);
+    color: var(--text-color);
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+button:hover {
+    background: var(--btn-hover);
+    transform: translateY(-2px);
+}
+
+.operator {
+    background: var(--operator-color);
+}
+
+.equals {
+    background: var(--equals-color);
+    grid-row: span 2;
+}
+
+.zero {
+    grid-column: span 2;
+}`,
+        javascript: `// Calculator functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const display = document.getElementById('result');
+    const buttons = document.querySelectorAll('button');
+    
+    let currentCalculation = '';
+    
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.textContent;
+            
+            if (value === 'C') {
+                clearDisplay();
+            } else if (value === '=') {
+                calculateResult();
+            } else {
+                appendValue(value);
+            }
+        });
+    });
+    
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+        if (e.key.match(/[0-9]/) || ['+', '-', '*', '/', '.'].includes(e.key)) {
+            appendValue(e.key);
+        } else if (e.key === 'Enter') {
+            calculateResult();
+        } else if (e.key === 'Escape') {
+            clearDisplay();
+        }
+    });
+    
+    function appendValue(value) {
+        currentCalculation += value;
+        display.value = currentCalculation;
+    }
+    
+    function calculateResult() {
+        try {
+            const result = eval(currentCalculation);
+            display.value = result;
+            currentCalculation = result.toString();
+        } catch (error) {
+            display.value = 'Error';
+            currentCalculation = '';
+        }
+    }
+    
+    function clearDisplay() {
+        currentCalculation = '';
+        display.value = '';
+    }
+});`
+    },
+    login: {
+        description: `
+            <div class="project-description">
+                <h2>Modern Login Interface</h2>
+                <p>A modern and secure login interface built with HTML, CSS, and JavaScript. Features form validation, password visibility toggle, and modern UI effects.</p>
+                
+                <h3>Features</h3>
+                <ul>
+                    <li>Real-time form validation</li>
+                    <li>Password visibility toggle</li>
+                    <li>Remember me functionality</li>
+                    <li>Modern glassmorphism design</li>
+                    <li>Responsive layout</li>
+                </ul>
+
+                <h3>Technical Details</h3>
+                <ul>
+                    <li>Built with HTML5, CSS3, and JavaScript</li>
+                    <li>Local storage for remember me</li>
+                    <li>CSS animations and transitions</li>
+                    <li>Input validation patterns</li>
+                </ul>
+            </div>
+        `,
+        html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Login</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="login-container">
+        <form class="login-form" id="loginForm">
+            <h2>Welcome Back</h2>
+            
+            <div class="input-group">
+                <input type="email" id="email" required>
+                <label>Email</label>
+                <i class='bx bx-envelope'></i>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="input-group">
+                <input type="password" id="password" required>
+                <label>Password</label>
+                <i class='bx bx-lock-alt'></i>
+                <i class='bx bx-show toggle-password'></i>
+                <span class="error-message"></span>
+            </div>
+
+            <div class="remember-forgot">
+                <label>
+                    <input type="checkbox" id="remember"> Remember me
+                </label>
+                <a href="#">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-button">
+                <span>Login</span>
+                <i class='bx bx-right-arrow-alt'></i>
+            </button>
+
+            <div class="register-link">
+                <p>Don't have an account? <a href="#">Register</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>`,
+        css: `/* Modern Login Styles */
+:root {
+    --primary-color: #ff002b;
+    --text-color: #fff;
+    --bg-color: #1c1c1c;
+    --input-color: rgba(255, 255, 255, 0.1);
+    --error-color: #e74c3c;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg-color);
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+}
+
+.login-form h2 {
+    text-align: center;
+    font-size: 2em;
+    color: var(--text-color);
+    margin-bottom: 30px;
+}
+
+.input-group {
+    position: relative;
+    margin: 30px 0;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 10px 10px 10px 35px;
+    background: var(--input-color);
+    border: none;
+    border-radius: 5px;
+    color: var(--text-color);
+    font-size: 1em;
+    outline: none;
+    transition: 0.3s;
+}
+
+.input-group label {
+    position: absolute;
+    left: 35px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-group input:focus ~ label,
+.input-group input:valid ~ label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8em;
+    color: var(--primary-color);
+}
+
+.input-group i {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-color);
+    font-size: 1.2em;
+}
+
+.toggle-password {
+    left: auto !important;
+    right: 10px;
+    cursor: pointer;
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.login-button:hover {
+    background: #cc0023;
+    transform: translateY(-2px);
+}`,
+        javascript: `// Login functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const togglePassword = document.querySelector('.toggle-password');
+    const rememberMe = document.getElementById('remember');
+
+    // Check for saved credentials
+    const savedEmail = localStorage.getItem('savedEmail');
+    const savedPassword = localStorage.getItem('savedPassword');
+    
+    if (savedEmail && savedPassword) {
+        emailInput.value = savedEmail;
+        passwordInput.value = savedPassword;
+        rememberMe.checked = true;
+    }
+
+    // Toggle password visibility
+    togglePassword.addEventListener('click', () => {
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        togglePassword.classList.toggle('bx-show');
+        togglePassword.classList.toggle('bx-hide');
+    });
+
+    // Form submission
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        if (validateForm()) {
+            // Show loading state
+            const submitButton = loginForm.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.innerHTML = '<i class="bx bx-loader-alt bx-spin"></i> Logging in...';
+            submitButton.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                if (rememberMe.checked) {
+                    localStorage.setItem('savedEmail', emailInput.value);
+                    localStorage.setItem('savedPassword', passwordInput.value);
+                } else {
+                    localStorage.removeItem('savedEmail');
+                    localStorage.removeItem('savedPassword');
+                }
+
+                // Show success message
+                alert('Login successful!');
+                
+                // Reset form
+                loginForm.reset();
+                
+                // Restore button
+                submitButton.innerHTML = originalText;
+                submitButton.disabled = false;
+            }, 2000);
+        }
+    });
+
+    function validateForm() {
+        let isValid = true;
+        
+        // Validate email
+        if (!emailInput.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+            showError(emailInput, 'Please enter a valid email address');
+            isValid = false;
+        } else {
+            hideError(emailInput);
+        }
+
+        // Validate password
+        if (passwordInput.value.length < 6) {
+            showError(passwordInput, 'Password must be at least 6 characters');
+            isValid = false;
+        } else {
+            hideError(passwordInput);
+        }
+
+        return isValid;
+    }
+
+    function showError(input, message) {
+        const errorElement = input.parentElement.querySelector('.error-message');
+        errorElement.textContent = message;
+        errorElement.style.opacity = '1';
+        input.classList.add('error');
+    }
+
+    function hideError(input) {
+        const errorElement = input.parentElement.querySelector('.error-message');
+        errorElement.style.opacity = '0';
+        input.classList.remove('error');
+    }
+});`
+    }
+};
+
+// Modal functionality
+function openModal(projectId) {
+    const modal = document.getElementById('projectModal');
+    const project = projectData[projectId];
+    
+    // Set content for each tab
+    document.querySelector('#description').innerHTML = project.description;
+    document.querySelector('#html code').textContent = project.html;
+    document.querySelector('#css code').textContent = project.css;
+    document.querySelector('#javascript code').textContent = project.javascript;
+    
+    // Apply syntax highlighting
+    Prism.highlightAll();
+    
+    // Show first tab by default
+    switchTab('description');
+    
+    // Show modal
+    modal.style.display = 'block';
+}
+
+function closeModal() {
+    document.getElementById('projectModal').style.display = 'none';
+}
+
+function switchTab(tabName) {
+    // Remove active class from all tabs and content
+    document.querySelectorAll('.modal__tab').forEach(tab => {
+        tab.classList.remove('active');
+    });
+    document.querySelectorAll('.modal__code').forEach(content => {
+        content.classList.remove('active');
+    });
+    
+    // Add active class to selected tab and content
+    document.querySelector(`.modal__tab[onclick*="${tabName}"]`).classList.add('active');
+    document.getElementById(tabName).classList.add('active');
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const modal = document.getElementById('projectModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+}
+
+// Contact Form Handling
+document.addEventListener('DOMContentLoaded', () => {
+    const contactForm = document.querySelector('.contact__form');
+    const lastCommentName = document.getElementById('lastCommentName');
+    const lastCommentDate = document.getElementById('lastCommentDate');
+    const lastCommentMessage = document.getElementById('lastCommentMessage');
+
+    // Load last comment from localStorage if it exists
+    const loadLastComment = () => {
+        const lastComment = JSON.parse(localStorage.getItem('lastComment'));
+        if (lastComment) {
+            lastCommentName.textContent = lastComment.name;
+            lastCommentDate.textContent = lastComment.date;
+            lastCommentMessage.textContent = lastComment.message;
+        }
+    };
+
+    // Call loadLastComment when page loads
+    loadLastComment();
+
+    // Handle form submission
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Get form values
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+
+        // Create comment object
+        const comment = {
+            name: name,
+            email: email,
+            message: message,
+            date: new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+        };
+
+        // Save to localStorage
+        localStorage.setItem('lastComment', JSON.stringify(comment));
+
+        // Update display
+        lastCommentName.textContent = comment.name;
+        lastCommentDate.textContent = comment.date;
+        lastCommentMessage.textContent = comment.message;
+
+        // Show success message
+        alert('Message sent successfully!');
+
+        // Reset form
+        contactForm.reset();
+    });
+});

@@ -21,7 +21,6 @@
     <title>Oussama Hatim | IT Developer & Designer</title>
 </head>
 <body>
-    <div class="mouse-light"></div>
     <div id="loader" class="loader">
         <div class="loader__content">
             <div class="loader__logo">OH</div>
@@ -181,21 +180,65 @@
         <!--===== WORK =====-->
         <section class="work section" id="work">
             <h2 class="section-title">Projects</h2>
+
             <div class="work__container bd-grid">
-                <div class="work__img" onclick="document.getElementById('modal1').style.display='block'">
-                    <img src="assets/img/work1.jpg" alt="Calculator Project">
-                    <div class="work__overlay">
-                        <h3 class="work__title">Calculator Project</h3>
-                        <p class="work__description">A modern calculator application built with HTML, CSS, and JavaScript.</p>
-                        <span class="work__overlay-text">Show More</span>
+                <!-- Calculator Project -->
+                <div class="work__item">
+                    <div class="work__img">
+                        <img src="assets/img/work1.jpg" alt="Calculator Project">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Modern Calculator</h3>
+                            <p class="work__description">A modern calculator application built with HTML, CSS, and JavaScript.</p>
+                            <div class="work__buttons">
+                                <a href="#" class="button work__button" onclick="openModal('calculator')">Details</a>
+                                <a href="#" class="button work__button" target="_blank">Live Demo</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="work__img" onclick="document.getElementById('modal2').style.display='block'">
-                    <img src="assets/img/work2.jpg" alt="Login Project">
-                    <div class="work__overlay">
-                        <h3 class="work__title">Login Project</h3>
-                        <p class="work__description">A secure and responsive login interface with modern design.</p>
-                        <span class="work__overlay-text">Show More</span>
+
+                <!-- Login Project -->
+                <div class="work__item">
+                    <div class="work__img">
+                        <img src="assets/img/work2.jpg" alt="Login Project">
+                        <div class="work__overlay">
+                            <h3 class="work__title">Modern Login</h3>
+                            <p class="work__description">A modern and secure login interface with form validation and modern UI effects.</p>
+                            <div class="work__buttons">
+                                <a href="#" class="button work__button" onclick="openModal('login')">Details</a>
+                                <a href="#" class="button work__button" target="_blank">Live Demo</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Details Modal -->
+            <div id="projectModal" class="modal">
+                <div class="modal__content">
+                    <span class="modal__close" onclick="closeModal()">&times;</span>
+                    <h2 class="modal__title">Project Details</h2>
+                    
+                    <div class="modal__tabs">
+                        <button class="modal__tab active" onclick="switchTab('description')">Description</button>
+                        <button class="modal__tab" onclick="switchTab('html')">HTML</button>
+                        <button class="modal__tab" onclick="switchTab('css')">CSS</button>
+                        <button class="modal__tab" onclick="switchTab('javascript')">JavaScript</button>
+                    </div>
+
+                    <div class="modal__body">
+                        <div id="description" class="modal__code active">
+                            <!-- Description content will be inserted here -->
+                        </div>
+                        <div id="html" class="modal__code">
+                            <!-- HTML content will be inserted here -->
+                        </div>
+                        <div id="css" class="modal__code">
+                            <!-- CSS content will be inserted here -->
+                        </div>
+                        <div id="javascript" class="modal__code">
+                            <!-- JavaScript content will be inserted here -->
+                        </div>
                     </div>
                 </div>
             </div>
@@ -251,404 +294,6 @@
         </section>
 
         <!--===== MODALS =====-->
-        <!-- Calculator Modal -->
-        <div id="modal1" class="modal">
-            <div class="modal__content">
-                <span class="modal__close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
-                <h2 class="modal__title">Calculator Project</h2>
-                <div class="modal__body">
-                    <div class="modal__image">
-                        <img src="assets/img/work1.jpg" alt="Calculator Project">
-                    </div>
-                    <div class="modal__description">
-                        <p>A modern calculator application built with HTML, CSS, and JavaScript. Features a clean user interface, supports basic arithmetic operations, and includes keyboard input functionality. The calculator includes:</p>
-                        <ul class="modal__features">
-                            <li>Basic arithmetic operations (add, subtract, multiply, divide)</li>
-                            <li>Keyboard input support</li>
-                            <li>Responsive design</li>
-                            <li>Clear and elegant UI</li>
-                        </ul>
-                    </div>
-                    <!-- Code Tabs -->
-                    <div class="modal__tabs">
-                        <button class="modal__tab active" data-tab="html">HTML</button>
-                        <button class="modal__tab" data-tab="css">CSS</button>
-                        <button class="modal__tab" data-tab="js">JavaScript</button>
-                    </div>
-                    <!-- Code Blocks -->
-                    <div class="modal__code-container">
-                        <div id="html-code" class="modal__code active">
-                            <pre><code class="language-html">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Modern Calculator&lt;/title&gt;
-    &lt;link rel="stylesheet" href="styles.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="calculator"&gt;
-        &lt;div class="display"&gt;
-            &lt;input type="text" id="result" readonly&gt;
-        &lt;/div&gt;
-        &lt;div class="buttons"&gt;
-            &lt;button class="clear"&gt;C&lt;/button&gt;
-            &lt;button class="operator"&gt;/&lt;/button&gt;
-            &lt;button class="operator"&gt;*&lt;/button&gt;
-            &lt;button class="operator"&gt;-&lt;/button&gt;
-            &lt;button&gt;7&lt;/button&gt;
-            &lt;button&gt;8&lt;/button&gt;
-            &lt;button&gt;9&lt;/button&gt;
-            &lt;button class="operator"&gt;+&lt;/button&gt;
-            &lt;button&gt;4&lt;/button&gt;
-            &lt;button&gt;5&lt;/button&gt;
-            &lt;button&gt;6&lt;/button&gt;
-            &lt;button&gt;1&lt;/button&gt;
-            &lt;button&gt;2&lt;/button&gt;
-            &lt;button&gt;3&lt;/button&gt;
-            &lt;button&gt;0&lt;/button&gt;
-            &lt;button&gt;.&lt;/button&gt;
-            &lt;button class="equals"&gt;=&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script src="script.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-                            </code></pre>
-                        </div>
-                        <div id="css-code" class="modal__code">
-                            <pre><code class="language-css">
-.calculator {
-    background: #1c1c1c;
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 300px;
-    margin: 50px auto;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.display input {
-    width: 100%;
-    padding: 20px;
-    font-size: 24px;
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-button {
-    padding: 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    background: #333;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #444;
-}
-
-.operator {
-    background: #ff002b;
-}
-
-.equals {
-    background: #2ecc71;
-    grid-column: span 2;
-}
-
-.clear {
-    background: #e74c3c;
-}
-                            </code></pre>
-                        </div>
-                        <div id="js-code" class="modal__code">
-                            <pre><code class="language-javascript">
-let display = document.getElementById('result');
-let buttons = document.querySelectorAll('button');
-
-buttons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        if(e.target.textContent === '=') {
-            try {
-                display.value = eval(display.value);
-            } catch {
-                display.value = 'Error';
-            }
-        } else if(e.target.textContent === 'C') {
-            display.value = '';
-        } else {
-            display.value += e.target.textContent;
-        }
-    });
-});
-
-// Keyboard support
-document.addEventListener('keydown', (e) => {
-    if(e.key >= 0 && e.key <= 9 || e.key === '.' || 
-       e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
-        display.value += e.key;
-    }
-    if(e.key === 'Enter') {
-        try {
-            display.value = eval(display.value);
-        } catch {
-            display.value = 'Error';
-        }
-    }
-    if(e.key === 'Escape') {
-        display.value = '';
-    }
-});
-                            </code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login Modal -->
-        <div id="modal2" class="modal">
-            <div class="modal__content">
-                <span class="modal__close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
-                <h2 class="modal__title">Login Project</h2>
-                <div class="modal__body">
-                    <div class="modal__image">
-                        <img src="assets/img/work2.jpg" alt="Login Project">
-                    </div>
-                    <div class="modal__description">
-                        <p>A modern and secure login interface built with HTML, CSS, and JavaScript. Features a responsive design with form validation and modern UI effects. The login system includes:</p>
-                        <ul class="modal__features">
-                            <li>Client-side form validation</li>
-                            <li>Password visibility toggle</li>
-                            <li>Responsive design for all devices</li>
-                            <li>Modern animations and transitions</li>
-                        </ul>
-                    </div>
-                    <!-- Code Tabs -->
-                    <div class="modal__tabs">
-                        <button class="modal__tab active" data-tab="login-html">HTML</button>
-                        <button class="modal__tab" data-tab="login-css">CSS</button>
-                        <button class="modal__tab" data-tab="login-js">JavaScript</button>
-                    </div>
-                    <!-- Code Blocks -->
-                    <div class="modal__code-container">
-                        <div id="login-html-code" class="modal__code active">
-                            <pre><code class="language-html">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Modern Login&lt;/title&gt;
-    &lt;link rel="stylesheet" href="styles.css"&gt;
-    &lt;link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="login-container"&gt;
-        &lt;form class="login-form" id="loginForm"&gt;
-            &lt;h2&gt;Welcome Back&lt;/h2&gt;
-            &lt;div class="input-group"&gt;
-                &lt;input type="email" id="email" required&gt;
-                &lt;label&gt;Email&lt;/label&gt;
-                &lt;i class='bx bx-envelope'&gt;&lt;/i&gt;
-            &lt;/div&gt;
-            &lt;div class="input-group"&gt;
-                &lt;input type="password" id="password" required&gt;
-                &lt;label&gt;Password&lt;/label&gt;
-                &lt;i class='bx bx-lock-alt'&gt;&lt;/i&gt;
-                &lt;i class='bx bx-show toggle-password'&gt;&lt;/i&gt;
-            &lt;/div&gt;
-            &lt;div class="remember-forgot"&gt;
-                &lt;label&gt;
-                    &lt;input type="checkbox"&gt; Remember me
-                &lt;/label&gt;
-                &lt;a href="#"&gt;Forgot Password?&lt;/a&gt;
-            &lt;/div&gt;
-            &lt;button type="submit"&gt;Login&lt;/button&gt;
-            &lt;div class="register-link"&gt;
-                &lt;p&gt;Don't have an account? &lt;a href="#"&gt;Register&lt;/a&gt;&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-    &lt;script src="script.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                        </div>
-                        <div id="login-css-code" class="modal__code">
-                            <pre><code class="language-css">
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #1c1c1c;
-}
-
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.login-form h2 {
-    text-align: center;
-    font-size: 2em;
-    color: #fff;
-    margin-bottom: 30px;
-}
-
-.input-group {
-    position: relative;
-    margin: 30px 0;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 1em;
-    color: #fff;
-    border: none;
-    border-bottom: 2px solid #fff;
-    outline: none;
-    background: transparent;
-    transition: 0.5s;
-}
-
-.input-group label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: #fff;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.input-group input:focus ~ label,
-.input-group input:valid ~ label {
-    top: -5px;
-    font-size: 0.8em;
-    color: #ff002b;
-}
-
-.input-group i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-
-button {
-    width: 100%;
-    padding: 10px 0;
-    background: #ff002b;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #cc0023;
-}
-                            </code></pre>
-                        </div>
-                        <div id="login-js-code" class="modal__code">
-                            <pre><code class="language-javascript">
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const togglePassword = document.querySelector('.toggle-password');
-    const passwordInput = document.getElementById('password');
-
-    // Toggle password visibility
-    togglePassword.addEventListener('click', () => {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        togglePassword.classList.toggle('bx-show');
-        togglePassword.classList.toggle('bx-hide');
-    });
-
-    // Form submission
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const email = document.getElementById('email').value;
-        const password = passwordInput.value;
-
-        // Basic validation
-        if (!email || !password) {
-            showError('Please fill in all fields');
-            return;
-        }
-
-        if (!isValidEmail(email)) {
-            showError('Please enter a valid email');
-            return;
-        }
-
-        if (password.length < 6) {
-            showError('Password must be at least 6 characters');
-            return;
-        }
-
-        // If validation passes, you would typically send this to a server
-        console.log('Login attempt:', { email, password });
-        showSuccess('Login successful!');
-    });
-
-    // Helper functions
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    function showError(message) {
-        // Add your error handling here
-        alert(message);
-    }
-
-    function showSuccess(message) {
-        // Add your success handling here
-        alert(message);
-    }
-});
-                            </code></pre>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- Coming Soon Modal -->
         <div id="comingSoonModal" class="modal">
             <div class="modal__content coming-soon__content">
@@ -753,7 +398,6 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
 
     <!--===== MAIN JS =====-->
-    <script src="assets/js/main.js"></script>
     <script>
     // Basic navigation functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -952,51 +596,6 @@ document.addEventListener('DOMContentLoaded', () => {
             event.target.style.display = 'none';
         }
     }
-
-    // Mouse and Touch Light Effect
-    const light = document.querySelector('.mouse-light');
-    let isMobile = window.innerWidth <= 768;
-    let touchTimeout;
-
-    // Mouse movement effect
-    document.addEventListener('mousemove', function(e) {
-        if (!isMobile) {
-            light.style.left = e.clientX + 'px';
-            light.style.top = e.clientY + 'px';
-        }
-    });
-
-    // Touch effect for mobile
-    document.addEventListener('touchstart', function(e) {
-        if (isMobile) {
-            const touch = e.touches[0];
-            light.style.left = touch.clientX + 'px';
-            light.style.top = touch.clientY + 'px';
-            light.classList.add('active');
-        }
-    });
-
-    document.addEventListener('touchmove', function(e) {
-        if (isMobile) {
-            const touch = e.touches[0];
-            light.style.left = touch.clientX + 'px';
-            light.style.top = touch.clientY + 'px';
-        }
-    });
-
-    document.addEventListener('touchend', function() {
-        if (isMobile) {
-            clearTimeout(touchTimeout);
-            touchTimeout = setTimeout(() => {
-                light.classList.remove('active');
-            }, 1000);
-        }
-    });
-
-    // Update mobile check on resize
-    window.addEventListener('resize', function() {
-        isMobile = window.innerWidth <= 768;
-    });
     </script>
 </body>
 </html>
