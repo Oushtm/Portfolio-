@@ -692,7 +692,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
 
-                <form action="send_email.php" method="POST" class="contact__form" id="contactForm">
+                <form action="https://formsubmit.co/oussamahatim2006@gmail.com" method="POST" class="contact__form" id="contactForm">
+                    <!-- Honeypot -->
+                    <input type="text" name="_honey" style="display: none">
+                    <!-- Disable Captcha -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio">
+                    <input type="hidden" name="_next" value="https://oushtm.github.io/portfolio-responsive-complete/#contact">
                     <div class="contact__form-group">
                         <input type="text" name="name" placeholder="Your Name" class="contact__input" required>
                     </div>
@@ -875,36 +882,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Handle form submission
     document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
+        // Don't prevent form submission - let FormSubmit handle it
+        // Show loading state
         const submitButton = this.querySelector('button[type="submit"]');
-        const originalButtonText = submitButton.innerHTML;
         submitButton.innerHTML = 'Sending...';
         submitButton.disabled = true;
-
-        const formData = new FormData(this);
-
-        fetch('send_email.php', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                document.getElementById('thankYouModal').style.display = 'block';
-                this.reset();
-            } else {
-                alert('Error sending message: ' + data.message);
-            }
-        })
-        .catch(error => {
-            alert('Error sending message. Please try again.');
-            console.error('Error:', error);
-        })
-        .finally(() => {
-            submitButton.innerHTML = originalButtonText;
-            submitButton.disabled = false;
-        });
+        
+        // Show thank you modal
+        document.getElementById('thankYouModal').style.display = 'block';
     });
 
     // Close modal when clicking outside
