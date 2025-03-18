@@ -21,6 +21,7 @@
     <title>Oussama Hatim | IT Developer & Designer</title>
 </head>
 <body>
+    <div class="mouse-light"></div>
     <div id="loader" class="loader">
         <div class="loader__content">
             <div class="loader__logo">OH</div>
@@ -752,6 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
     </script>
 
     <!--===== MAIN JS =====-->
+    <script src="assets/js/main.js"></script>
     <script>
     // Basic navigation functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -950,6 +952,51 @@ document.addEventListener('DOMContentLoaded', () => {
             event.target.style.display = 'none';
         }
     }
+
+    // Mouse and Touch Light Effect
+    const light = document.querySelector('.mouse-light');
+    let isMobile = window.innerWidth <= 768;
+    let touchTimeout;
+
+    // Mouse movement effect
+    document.addEventListener('mousemove', function(e) {
+        if (!isMobile) {
+            light.style.left = e.clientX + 'px';
+            light.style.top = e.clientY + 'px';
+        }
+    });
+
+    // Touch effect for mobile
+    document.addEventListener('touchstart', function(e) {
+        if (isMobile) {
+            const touch = e.touches[0];
+            light.style.left = touch.clientX + 'px';
+            light.style.top = touch.clientY + 'px';
+            light.classList.add('active');
+        }
+    });
+
+    document.addEventListener('touchmove', function(e) {
+        if (isMobile) {
+            const touch = e.touches[0];
+            light.style.left = touch.clientX + 'px';
+            light.style.top = touch.clientY + 'px';
+        }
+    });
+
+    document.addEventListener('touchend', function() {
+        if (isMobile) {
+            clearTimeout(touchTimeout);
+            touchTimeout = setTimeout(() => {
+                light.classList.remove('active');
+            }, 1000);
+        }
+    });
+
+    // Update mobile check on resize
+    window.addEventListener('resize', function() {
+        isMobile = window.innerWidth <= 768;
+    });
     </script>
 </body>
 </html>

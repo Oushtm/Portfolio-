@@ -489,18 +489,30 @@ img {
 
 .work__img {
   position: relative;
-  box-shadow: 0px 4px 25px rgba(14, 36, 49, 0.15);
+  width: 100%;
+  height: 300px;
   border-radius: 0.5rem;
   overflow: hidden;
+  cursor: pointer;
+  border: 3px solid var(--first-color);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+}
+
+.work__img:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 .work__img img {
   width: 100%;
-  transition: 0.5s ease;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
 }
 
 .work__img:hover img {
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
 .work__img::before {
@@ -1317,5 +1329,64 @@ html {
     }
     100% {
         transform: scale(1);
+    }
+}
+
+/* Mouse Light Effect */
+.mouse-light {
+    position: fixed;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, 
+        rgba(255,0,43,0.08) 0%,
+        rgba(255,0,43,0.04) 30%,
+        rgba(255,0,43,0) 60%
+    );
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: all 0.1s ease-out;
+    mix-blend-mode: screen;
+    filter: blur(15px);
+}
+
+.mouse-light::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, 
+        rgba(255,0,43,0.05) 0%,
+        rgba(255,0,43,0.02) 30%,
+        rgba(255,0,43,0) 60%
+    );
+    border-radius: 50%;
+    filter: blur(20px);
+    animation: particleTrail 1s ease-out infinite;
+}
+
+@keyframes particleTrail {
+    0% {
+        transform: scale(1);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Mobile Touch Effect */
+@media (max-width: 768px) {
+    .mouse-light {
+        width: 150px;
+        height: 150px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .mouse-light.active {
+        opacity: 1;
     }
 }
