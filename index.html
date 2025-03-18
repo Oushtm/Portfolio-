@@ -674,15 +674,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="contact__details">
                         <div class="contact__detail-item">
                             <i class='bx bx-envelope contact__icon'></i>
-                            <span class="contact__detail-text">oussamahatim2006@gmail.com</span>
+                            <a href="mailto:oussamahatim2006@gmail.com" class="contact__detail-text">oussamahatim2006@gmail.com</a>
                         </div>
                         <div class="contact__detail-item">
                             <i class='bx bx-phone contact__icon'></i>
-                            <span class="contact__detail-text">+212 615376665</span>
+                            <a href="tel:+212615376665" class="contact__detail-text">+212 615376665</a>
                         </div>
                         <div class="contact__detail-item">
                             <i class='bx bx-map contact__icon'></i>
-                            <span class="contact__detail-text">Morocco</span>
+                            <a href="https://www.google.com/maps?q=Morocco" target="_blank" class="contact__detail-text">Morocco</a>
                         </div>
                     </div>
 
@@ -770,15 +770,40 @@ document.addEventListener('DOMContentLoaded', () => {
                 navMenu.classList.toggle('show');
             });
         }
-        
-        // Nav link active state
+
+        // Scroll spy functionality
+        const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav__link');
+
+        function scrollActive() {
+            const scrollY = window.pageYOffset;
+
+            sections.forEach(current => {
+                const sectionHeight = current.offsetHeight;
+                const sectionTop = current.offsetTop - 50;
+                const sectionId = current.getAttribute('id');
+
+                if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    document.querySelector('.nav__link[href*=' + sectionId + ']').classList.add('active-link');
+                } else {
+                    document.querySelector('.nav__link[href*=' + sectionId + ']').classList.remove('active-link');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', scrollActive);
+        
+        // Nav link click handling
         navLinks.forEach(link => {
-            link.addEventListener('click', function() {
-                // Remove active class from all links
-                navLinks.forEach(l => l.classList.remove('active-link'));
-                // Add active class to clicked link
-                this.classList.add('active-link');
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Get the target section id from the href
+                const targetId = this.getAttribute('href').substring(1);
+                const targetSection = document.getElementById(targetId);
+                
+                // Smooth scroll to target section
+                targetSection.scrollIntoView({ behavior: 'smooth' });
                 
                 // Close mobile menu
                 if (navMenu) {
