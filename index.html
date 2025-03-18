@@ -692,15 +692,22 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
 
-                <form action="" class="contact__form" id="contactForm" onsubmit="event.preventDefault(); document.getElementById('thankYouModal').style.display='block';">
+                <form action="https://formsubmit.co/oussamahatim2006@gmail.com" method="POST" class="contact__form" id="contactForm">
+                    <!-- Honeypot -->
+                    <input type="text" name="_honey" style="display: none">
+                    <!-- Disable Captcha -->
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_subject" value="New Contact Form Submission from Portfolio">
+                    <input type="hidden" name="_next" value="https://oushtm.github.io/portfolio-responsive-complete/#contact">
                     <div class="contact__form-group">
-                        <input type="text" placeholder="Your Name" class="contact__input" required>
+                        <input type="text" name="name" placeholder="Your Name" class="contact__input" required>
                     </div>
                     <div class="contact__form-group">
-                        <input type="email" placeholder="Your Email" class="contact__input" required>
+                        <input type="email" name="email" placeholder="Your Email" class="contact__input" required>
                     </div>
                     <div class="contact__form-group">
-                        <input type="text" placeholder="Subject" class="contact__input" required>
+                        <input type="text" name="subject" placeholder="Subject" class="contact__input" required>
                     </div>
                     <div class="contact__form-group">
                         <textarea name="message" placeholder="Your Message" class="contact__input" rows="6" required></textarea>
@@ -743,8 +750,6 @@ document.addEventListener('DOMContentLoaded', () => {
     <script src="https://unpkg.com/scrollreveal"></script>
 
     <!--===== MAIN JS =====-->
-    <!-- <script src="assets/js/main.js"></script> -->
-
     <script>
     // Basic navigation functionality
     document.addEventListener('DOMContentLoaded', function() {
@@ -874,6 +879,28 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById(codeId).classList.add('active');
         });
     });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Don't prevent form submission - let it send the email
+        // Show the thank you modal
+        document.getElementById('thankYouModal').style.display = 'block';
+    });
+
+    // Form submission handling
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Don't prevent form submission - let FormSubmit handle it
+        // Show loading state
+        const submitButton = this.querySelector('button[type="submit"]');
+        submitButton.innerHTML = 'Sending...';
+        submitButton.disabled = true;
+    });
+
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    }
     </script>
 </body>
 </html>
