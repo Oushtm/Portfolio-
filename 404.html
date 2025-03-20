@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --first-color: #FF0000;
+            --first-color-alt: #cc0000;
+            --title-color: #fff;
+            --text-color: #f4f4f4;
+            --body-color: #000000;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+            padding: 2rem;
+        }
+
+        .error-title {
+            font-size: 8rem;
+            color: var(--first-color);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        .error-subtitle {
+            font-size: 2rem;
+            color: var(--title-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .error-text {
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .home-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2rem;
+            background: var(--first-color);
+            color: var(--title-color);
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+            gap: 0.5rem;
+        }
+
+        .home-button:hover {
+            background: var(--first-color-alt);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .error-image {
+            width: 300px;
+            height: 300px;
+            margin: 2rem auto;
+            opacity: 0.8;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .error-title {
+                font-size: 6rem;
+            }
+
+            .error-subtitle {
+                font-size: 1.5rem;
+            }
+
+            .error-image {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <h1 class="error-title">404</h1>
+        <h2 class="error-subtitle">Page Not Found</h2>
+        <div class="error-image">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#FF0000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12" y2="16"/>
+            </svg>
+        </div>
+        <p class="error-text">
+            Oops! The page you're looking for seems to have vanished into the digital void. 
+            Don't worry though, you can always return to the homepage and start fresh.
+        </p>
+        <a href="index.html" class="home-button">
+            <i class='bx bx-home-alt'></i>
+            Back to Homepage
+        </a>
+    </div>
+</body>
+</html> 

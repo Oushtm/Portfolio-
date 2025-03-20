@@ -647,7 +647,7 @@
                 justify-content: space-between;
             align-items: center;
                 text-align: left;
-                gap: 1rem;
+            gap: 1rem;
                 width: 100%;
             }
 
@@ -1316,17 +1316,17 @@
                     <div class="form-group">
                         <label class="form-label">About Description</label>
                         <textarea class="form-control" id="aboutDescription" required rows="5"></textarea>
-            </div>
+                                </div>
                     <div class="form-group">
                         <label class="form-label">Years of Experience</label>
                         <input type="number" class="form-control" id="yearsExperience" required>
-        </div>
+                                </div>
                     <div class="form-group">
                         <label class="form-label">Social Media Links</label>
                         <div class="social-links">
                             <input type="url" class="form-control" id="linkedinUrl" placeholder="LinkedIn URL">
                             <input type="url" class="form-control" id="githubUrl" placeholder="GitHub URL">
-                        </div>
+                                </div>
                     </div>
                     <button type="submit" class="save-btn">
                         <i class='bx bx-save'></i> Save About Me
@@ -1344,26 +1344,26 @@
                 <div class="existing-projects">
                     <h3>Existing Projects</h3>
                     <div id="projectsList" class="projects-grid"></div>
-                    </div>
-                    
+                        </div>
+                        
                 <!-- Add/Edit Project Form -->
                 <form id="projectForm" onsubmit="handleProjectSubmit(event)">
                     <input type="hidden" id="projectId">
                     <div class="form-group">
                         <label class="form-label">Project Title</label>
                         <input type="text" class="form-control" id="projectTitle" required>
-                    </div>
+                        </div>
                     <div class="form-group">
                         <label class="form-label">Project Description</label>
                         <textarea class="form-control" id="projectDescription" required></textarea>
-                    </div>
+                        </div>
                     <div class="form-group">
                         <label class="form-label">Project Image</label>
                         <div class="image-upload" onclick="document.getElementById('projectImage').click()">
                             <i class='bx bx-image-add'></i>
                             <p>Click to upload project image</p>
                             <input type="file" id="projectImage" accept="image/*" style="display: none;">
-                    </div>
+                        </div>
                         <div id="projectImagePreview" class="image-preview"></div>
                         </div>
                     <div class="form-group">
@@ -1396,8 +1396,8 @@
                         <i class='bx bx-save'></i> Save Contact Information
                     </button>
                 </form>
-                    </div>
-                    
+        </div>
+
             <!-- Update Work Services section -->
             <section id="work-services" class="section">
                 <h2 class="section-title">
@@ -1431,13 +1431,33 @@
                     </form>
             </section>
         </main>
-    </div>
-
+                    </div>
+                    
     <script>
-        // Check authentication
-        if (!localStorage.getItem('adminAuth')) {
-                window.location.href = 'login.html';
-        }
+        // Strict authentication check
+        (function() {
+            const isAuthenticated = localStorage.getItem('adminAuth');
+            const currentPath = window.location.pathname;
+            
+            // If not authenticated and trying to access dashboard, redirect to login
+            if (!isAuthenticated && currentPath.includes('dashboard')) {
+                window.location.replace('login.html');
+            }
+            
+            // Also check if coming from login page
+            const referrer = document.referrer;
+            if (!referrer.includes('login.html') && !isAuthenticated) {
+                window.location.replace('login.html');
+            }
+        })();
+
+        // Periodic authentication check
+        setInterval(function() {
+            const isAuthenticated = localStorage.getItem('adminAuth');
+            if (!isAuthenticated) {
+                window.location.replace('login.html');
+            }
+        }, 5000);
 
         // Mobile menu toggle
         const mobileMenuBtn = document.createElement('button');
@@ -1481,7 +1501,7 @@
                             <button type="button" class="remove-btn" onclick="removeProfileImage(this)">
                                 <i class='bx bx-x'></i>
                             </button>
-                        </div>
+                    </div>
                     `;
                     
                     // Update the about me data with the new image
@@ -1523,7 +1543,7 @@
                     <button type="button" class="remove-btn" onclick="removeProfileImage(this)">
                         <i class='bx bx-x'></i>
                     </button>
-                </div>
+                    </div>
             `;
             
             // Update home page profile image
@@ -1935,7 +1955,7 @@
 
         function resetServiceForm() {
             document.getElementById('serviceForm').reset();
-            document.getElementById('serviceId').value = '';
+                document.getElementById('serviceId').value = '';
             document.getElementById('serviceSubmitText').textContent = 'Add Service';
             editingServiceIndex = -1;
         }

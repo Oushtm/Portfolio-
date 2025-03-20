@@ -189,7 +189,7 @@
             <h1>Admin Login</h1>
             <p>Please enter your credentials to access the dashboard</p>
         </div>
-        <form class="login-form" onsubmit="handleLogin(event)">
+        <form class="login-form" id="loginForm">
             <div class="form-group">
                 <label for="username">Username</label>
                 <input type="text" id="username" required>
@@ -198,7 +198,7 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" required>
             </div>
-            <div class="error-message" id="errorMessage">Invalid username or password</div>
+            <div class="error-message" id="errorMsg">Invalid username or password</div>
             <button type="submit" class="login-btn">
                 <i class='bx bx-log-in'></i> Login
             </button>
@@ -206,20 +206,44 @@
     </div>
 
     <script>
-        function handleLogin(event) {
-            event.preventDefault();
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const errorMessage = document.getElementById('errorMessage');
-
-            // Simple authentication (replace with your actual authentication logic)
-            if (username === 'admin' && password === 'admin123') {
-                localStorage.setItem('adminAuth', 'true');
-                window.location.href = 'dashboard.html';
-            } else {
-                errorMessage.style.display = 'block';
+        // Check if already authenticated and coming from correct path
+        function checkAuth() {
+            const isAuthenticated = localStorage.getItem('adminAuth');
+            const currentPath = window.location.pathname;
+            
+            if (isAuthenticated) {
+                // Only redirect to dashboard if coming from a valid path
+                if (currentPath.includes('login.html')) {
+                    window.location.replace('dashboard.html');
+                }
             }
         }
+
+        // Check auth on page load
+        checkAuth();
+
+        // Handle login form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // Check credentials
+            if (username === 'admin' && password === 'admin123') {
+                // Set authentication with timestamp
+                localStorage.setItem('adminAuth', 'true');
+                localStorage.setItem('adminAuthTime', Date.now().toString());
+                
+                // Redirect to dashboard using replace to prevent back button
+                window.location.replace('dashboard.html');
+            } else {
+                // Show error message
+                const errorMsg = document.getElementById('errorMsg');
+                errorMsg.textContent = 'Invalid username or password';
+                errorMsg.style.display = 'block';
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', function() {
             const savedColor = localStorage.getItem('themeColor') || '#FF0000'; // Default to red if no color saved
