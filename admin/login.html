@@ -3,45 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
-    <link rel="stylesheet" href="admin.css">
+    <title>Admin Login - Oussama Hatim</title>
     <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --first-color: #FF0000;
+            --first-color-alt: #cc0000;
+            --first-color-lighter: rgba(255, 0, 0, 0.1);
+            --title-color: #fff;
+            --text-color: #f4f4f4;
+            --text-color-light: #aaa;
+            --body-color: #000000;
+            --container-color: #111111;
+            --input-color: #1a1a1a;
+            --border-color: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-container {
+            background: var(--container-color);
+            padding: 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .login-header {
+            margin-bottom: 2rem;
+        }
+
+        .login-header img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid var(--first-color);
+            padding: 3px;
+            margin-bottom: 1rem;
+        }
+
+        .login-header h1 {
+            color: var(--first-color);
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .login-header p {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--input-color);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: .3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--first-color);
+            box-shadow: 0 0 0 2px var(--first-color-lighter);
+        }
+
+        .login-btn {
+            background: var(--first-color);
+            color: var(--title-color);
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .login-btn:hover {
+            background: var(--first-color-alt);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .error-message {
+            color: var(--first-color);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        @media screen and (max-width: 480px) {
+            .login-container {
+                padding: 2rem;
+            }
+        }
+
+        .back-home-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: var(--first-color);
+            color: var(--title-color);
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: .3s;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .back-home-btn:hover {
+            background: var(--first-color-alt);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+        }
+
+        .back-home-btn i {
+            font-size: 1.2rem;
+        }
+
+        @media screen and (max-width: 480px) {
+            .back-home-btn {
+                top: 10px;
+                left: 10px;
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
 </head>
 <body>
+    <a href="../index.html" class="back-home-btn">
+        <i class='bx bx-home'></i> Back to Home
+    </a>
     <div class="login-container">
-        <div class="login-box">
-            <h2><i class='bx bx-lock-alt'></i> Admin Login</h2>
-            <form id="loginForm" onsubmit="return handleLogin(event)">
-                <div class="input-group">
-                    <i class='bx bx-user'></i>
-                    <input type="text" id="username" placeholder="Username" required>
-                </div>
-                <div class="input-group">
-                    <i class='bx bx-lock-alt'></i>
-                    <input type="password" id="password" placeholder="Password" required>
-                </div>
-                <button type="submit">Login</button>
-            </form>
+        <div class="login-header">
+            <img src="../assets/img/OH.png" alt="Logo">
+            <h1>Admin Login</h1>
+            <p>Please enter your credentials to access the dashboard</p>
         </div>
+        <form class="login-form" onsubmit="handleLogin(event)">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="error-message" id="errorMessage">Invalid username or password</div>
+            <button type="submit" class="login-btn">
+                <i class='bx bx-log-in'></i> Login
+            </button>
+        </form>
     </div>
 
     <script>
         function handleLogin(event) {
             event.preventDefault();
-            
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
-            
-            // Check credentials
+            const errorMessage = document.getElementById('errorMessage');
+
+            // Simple authentication (replace with your actual authentication logic)
             if (username === 'admin' && password === 'admin123') {
-                // Store login state with the correct key that matches dashboard.html
                 localStorage.setItem('adminAuth', 'true');
-                // Redirect to dashboard
                 window.location.href = 'dashboard.html';
-                return false;
             } else {
-                alert('Invalid credentials. Please try again.');
+                errorMessage.style.display = 'block';
             }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedColor = localStorage.getItem('themeColor') || '#FF0000'; // Default to red if no color saved
+            if (savedColor === '#000000' || savedColor === '#FFFFFF' || savedColor === '#FF0000') {
+                const root = document.documentElement;
+                root.style.setProperty('--first-color', savedColor);
+                root.style.setProperty('--first-color-alt', adjustColor(savedColor, -20));
+                root.style.setProperty('--first-color-lighter', `${savedColor}1A`);
+                
+                updateColorInDocument(savedColor);
+            }
+        });
+
+        // Add storage event listener to update when theme color changes
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'themeColor') {
+                const newColor = e.newValue;
+                if (newColor) {
+                    const root = document.documentElement;
+                    root.style.setProperty('--first-color', newColor);
+                    root.style.setProperty('--first-color-alt', adjustColor(newColor, -20));
+                    root.style.setProperty('--first-color-lighter', `${newColor}1A`);
+                    
+                    // Update all instances of the color in the document
+                    updateColorInDocument(newColor);
+                    
+                    // Update all elements with the theme color
+                    document.querySelectorAll('*').forEach(element => {
+                        const style = window.getComputedStyle(element);
+                        if (style.color === 'rgb(255, 0, 0)' || style.color === '#ff0000') {
+                            element.style.color = newColor;
+                        }
+                        if (style.backgroundColor === 'rgb(255, 0, 0)' || style.backgroundColor === '#ff0000') {
+                            element.style.backgroundColor = newColor;
+                        }
+                        if (style.borderColor === 'rgb(255, 0, 0)' || style.borderColor === '#ff0000') {
+                            element.style.borderColor = newColor;
+                        }
+                    });
+                }
+            }
+        });
+
+        function adjustColor(color, amount) {
+            const hex = color.replace('#', '');
+            const r = Math.max(0, Math.min(255, parseInt(hex.substr(0, 2), 16) + amount));
+            const g = Math.max(0, Math.min(255, parseInt(hex.substr(2, 2), 16) + amount));
+            const b = Math.max(0, Math.min(255, parseInt(hex.substr(4, 2), 16) + amount));
+            return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+        }
+
+        function updateColorInDocument(newColor) {
+            // Update all elements with the current primary color
+            const elements = document.querySelectorAll('*');
+            elements.forEach(element => {
+                const style = window.getComputedStyle(element);
+                if (style.color === 'rgb(255, 0, 0)' || style.color === '#ff0000') {
+                    element.style.color = newColor;
+                }
+                if (style.backgroundColor === 'rgb(255, 0, 0)' || style.backgroundColor === '#ff0000') {
+                    element.style.backgroundColor = newColor;
+                }
+                if (style.borderColor === 'rgb(255, 0, 0)' || style.borderColor === '#ff0000') {
+                    element.style.borderColor = newColor;
+                }
+            });
         }
     </script>
 </body>

@@ -47,7 +47,7 @@
                     </li>
                     <li class="nav__item">
                         <a href="#skills" class="nav__link">
-                            <i class='bx bx-book'></i> Skills
+                            <i class='bx bx-code-alt'></i> Skills
                         </a>
                     </li>
                     <li class="nav__item">
@@ -151,47 +151,44 @@
         <section class="skills section" id="skills">
             <h2 class="section-title">Skills</h2>
             <div class="skills__container bd-grid">
-                <div>
-                    <h2 class="skills__subtitle">Profesional Skills</h2>
-                    <p class="skills__text">As a first-year IT Development student, I have developed a strong foundation in both programming and design. My skills enable me to create efficient, user-friendly digital solutions. Below are the key areas where I excel: </p>
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxl-html5 skills__icon'></i>
-                            <span class="skills__name">HTML</span>
+                <div class="skills__content">
+                    <div class="skills__grid">
+                        <!-- Development Skills -->
+                        <div class="skill__block">
+                            <i class='bx bxl-html5 skill__icon'></i>
+                            <span class="skill__name">HTML</span>
                         </div>
-                        <span class="skills__percentage">80%</span>
-                        <div class="skills__bar skills__html"></div>
-                    </div>
-
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxl-css3 skills__icon'></i>
-                            <span class="skills__name">CSS</span>
+                        
+                        <div class="skill__block">
+                            <i class='bx bxl-css3 skill__icon'></i>
+                            <span class="skill__name">CSS</span>
                         </div>
-                        <span class="skills__percentage">70%</span>
-                        <div class="skills__bar skills__css"></div>
-                    </div>
-
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxl-javascript skills__icon'></i>
-                            <span class="skills__name">JAVASCRIPT</span>
+                        
+                        <div class="skill__block">
+                            <i class='bx bxl-javascript skill__icon'></i>
+                            <span class="skill__name">JavaScript</span>
                         </div>
-                        <span class="skills__percentage">60%</span>
-                        <div class="skills__bar skills__js"></div>
-                    </div>
-
-                    <div class="skills__data">
-                        <div class="skills__names">
-                            <i class='bx bxs-paint skills__icon'></i>
-                            <span class="skills__name">UX/UI Design</span>
+                        
+                        <div class="skill__block">
+                            <i class='bx bxl-bootstrap skill__icon'></i>
+                            <span class="skill__name">Bootstrap</span>
                         </div>
-                        <span class="skills__percentage">85%</span>
-                        <div class="skills__bar skills__ux"></div>
+                        
+                        <div class="skill__block">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d5/Tailwind_CSS_Logo.svg/2560px-Tailwind_CSS_Logo.svg.png" alt="Tailwind CSS" class="skill__icon skill__icon-img">
+                            <span class="skill__name">Tailwind</span>
+                        </div>
+                        
+                        <div class="skill__block">
+                            <i class='bx bxl-adobe skill__icon'></i>
+                            <span class="skill__name">Photoshop</span>
+                        </div>
+                        
+                        <div class="skill__block">
+                            <i class='bx bxs-palette skill__icon'></i>
+                            <span class="skill__name">Canva</span>
+                        </div>
                     </div>
-                </div>
-                <div>              
-                    <img src="assets/img/work3.jpg" alt="" class="skills__img">
                 </div>
             </div>
         </section>
@@ -200,22 +197,7 @@
         <section class="work section" id="work">
             <h2 class="section-title">Projects</h2>
             <div class="work__container bd-grid">
-                <div class="work__img" onclick="document.getElementById('modal1').style.display='block'">
-                    <img src="assets/img/work1.jpg" alt="Calculator Project">
-                    <div class="work__overlay">
-                        <h3 class="work__title">Calculator Project</h3>
-                        <p class="work__description">A modern calculator application built with HTML, CSS, and JavaScript.</p>
-                        <span class="work__overlay-text">Show More</span>
-                    </div>
-                </div>
-                <div class="work__img" onclick="document.getElementById('modal2').style.display='block'">
-                    <img src="assets/img/work2.jpg" alt="Login Project">
-                    <div class="work__overlay">
-                        <h3 class="work__title">Login Project</h3>
-                        <p class="work__description">A secure and responsive login interface with modern design.</p>
-                        <span class="work__overlay-text">Show More</span>
-                    </div>
-                </div>
+                <!-- Projects will be loaded dynamically -->
             </div>
         </section>
 
@@ -224,108 +206,12 @@
             <h2 class="section-title">Future Services</h2>
             
             <div class="services__container bd-grid">
-                <div class="services__card">
-                    <i class='bx bx-code-alt services__icon'></i>
-                    <h3 class="services__title">Web Development</h3>
-                    <p class="services__description">Creating responsive and modern websites using the latest technologies and best practices.</p>
-                    <ul class="services__list">
-                        <li><i class='bx bx-check-circle'></i> Custom Website Development</li>
-                        <li><i class='bx bx-check-circle'></i> Responsive Design</li>
-                        <li><i class='bx bx-check-circle'></i> Performance Optimization</li>
-                    </ul>
-                    <a href="#" class="services__button" onclick="event.preventDefault(); document.getElementById('comingSoonModal').style.display='block'">
-                        Learn More <i class='bx bx-right-arrow-alt'></i>
-                    </a>
-                </div>
-
-                <div class="services__card">
-                    <i class='bx bx-palette services__icon'></i>
-                    <h3 class="services__title">UI/UX Design</h3>
-                    <p class="services__description">Designing intuitive and beautiful user interfaces with a focus on user experience.</p>
-                    <ul class="services__list">
-                        <li><i class='bx bx-check-circle'></i> User Interface Design</li>
-                        <li><i class='bx bx-check-circle'></i> User Experience Design</li>
-                        <li><i class='bx bx-check-circle'></i> Prototyping & Wireframes</li>
-                    </ul>
-                    <a href="#" class="services__button" onclick="event.preventDefault(); document.getElementById('comingSoonModal').style.display='block'">
-                        Learn More <i class='bx bx-right-arrow-alt'></i>
-                    </a>
-                </div>
-
-                <div class="services__card">
-                    <i class='bx bx-mobile-alt services__icon'></i>
-                    <h3 class="services__title">Mobile Development</h3>
-                    <p class="services__description">Building cross-platform mobile applications with modern frameworks.</p>
-                    <ul class="services__list">
-                        <li><i class='bx bx-check-circle'></i> iOS & Android Apps</li>
-                        <li><i class='bx bx-check-circle'></i> Cross-platform Solutions</li>
-                        <li><i class='bx bx-check-circle'></i> App Maintenance</li>
-                    </ul>
-                    <a href="#" class="services__button" onclick="event.preventDefault(); document.getElementById('comingSoonModal').style.display='block'">
-                        Learn More <i class='bx bx-right-arrow-alt'></i>
-                    </a>
-                </div>
+                <!-- Services will be loaded dynamically -->
             </div>
         </section>
 
         <!--===== MODALS =====-->
-        <!-- Calculator Modal -->
-        <div id="modal1" class="modal">
-            <div class="modal__content">
-                <span class="modal__close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
-                <h2 class="modal__title">Calculator Project</h2>
-                <div class="modal__body">
-                    <div class="modal__image">
-                        <img src="assets/img/work1.jpg" alt="Calculator Project">
-                    </div>
-                    <div class="modal__description">
-                        <p>A modern calculator application built with HTML, CSS, and JavaScript. Features a clean user interface, supports basic arithmetic operations, and includes keyboard input functionality. The calculator includes:</p>
-                        <ul class="modal__features">
-                            <li>Basic arithmetic operations (add, subtract, multiply, divide)</li>
-                            <li>Keyboard input support</li>
-                            <li>Responsive design</li>
-                            <li>Clear and elegant UI</li>
-                        </ul>
-                    </div>
-                    <!-- Demo Section -->
-                    <div class="modal__demo">
-                        <h3 class="modal__subtitle">Live Demo</h3>
-                        <div class="modal__iframe-container">
-                            <iframe src="assets/demos/calculator.html" class="modal__iframe" title="Calculator Demo"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Login Modal -->
-        <div id="modal2" class="modal">
-            <div class="modal__content">
-                <span class="modal__close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
-                <h2 class="modal__title">Login Project</h2>
-                <div class="modal__body">
-                    <div class="modal__image">
-                        <img src="assets/img/work2.jpg" alt="Login Project">
-                    </div>
-                    <div class="modal__description">
-                        <p>A modern and secure login interface built with HTML, CSS, and JavaScript. Features a responsive design with form validation and modern UI effects. The login system includes:</p>
-                        <ul class="modal__features">
-                            <li>Client-side form validation</li>
-                            <li>Password visibility toggle</li>
-                            <li>Responsive design for all devices</li>
-                            <li>Modern animations and transitions</li>
-                        </ul>
-                    </div>
-                    <!-- Demo Section -->
-                    <div class="modal__demo">
-                        <h3 class="modal__subtitle">Live Demo</h3>
-                        <div class="modal__iframe-container">
-                            <iframe src="assets/demos/login.html" class="modal__iframe" title="Login Demo"></iframe>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Project modals will be loaded dynamically -->
 
         <!-- Coming Soon Modal -->
         <div id="comingSoonModal" class="modal">
@@ -504,6 +390,17 @@
         window.addEventListener('scroll', scrollActive);
         // Initial check for active section
         scrollActive();
+
+        // Load saved theme color
+        const savedColor = localStorage.getItem('themeColor') || '#FF0000'; // Default to red if no color saved
+        if (savedColor === '#000000' || savedColor === '#FFFFFF' || savedColor === '#FF0000') {
+            const root = document.documentElement;
+            root.style.setProperty('--first-color', savedColor);
+            root.style.setProperty('--first-color-alt', adjustColor(savedColor, -20));
+            root.style.setProperty('--first-color-lighter', `${savedColor}1A`);
+            
+            updateColorInDocument(savedColor);
+        }
     });
 
     // Initialize ScrollReveal for animations if it exists
@@ -605,6 +502,397 @@
             event.target.style.display = 'none';
         }
     }
+
+    // Load and display projects
+    function loadProjects() {
+        const workContainer = document.querySelector('.work__container');
+        const savedProjects = localStorage.getItem('projects');
+        let projects = [];
+
+        if (savedProjects) {
+            projects = JSON.parse(savedProjects);
+        } else {
+            // Default projects if none in localStorage
+            projects = [
+                {
+                    id: '1',
+                    title: 'CALCULATOR PROJECT',
+                    description: 'A modern calculator application built with HTML, CSS, and JavaScript.',
+                    imageUrl: 'assets/img/work1.jpg',
+                    url: 'https://github.com/Oussama-Hatim/Calculator-Project',
+                    features: [
+                        'Basic arithmetic operations (add, subtract, multiply, divide)',
+                        'Keyboard input support',
+                        'Responsive design',
+                        'Clear and elegant UI'
+                    ]
+                },
+                {
+                    id: '2',
+                    title: 'LOGIN PROJECT',
+                    description: 'A secure and responsive login interface with modern design.',
+                    imageUrl: 'assets/img/work2.jpg',
+                    url: 'https://github.com/Oussama-Hatim/Login-Project',
+                    features: [
+                        'Client-side form validation',
+                        'Password visibility toggle',
+                        'Responsive design for all devices',
+                        'Modern animations and transitions'
+                    ]
+                }
+            ];
+            localStorage.setItem('projects', JSON.stringify(projects));
+        }
+
+        // Update work container
+        workContainer.innerHTML = projects.map(project => `
+            <div class="work__img" onclick="document.getElementById('modal${project.id}').style.display='block'">
+                <img src="${project.imageUrl}" alt="${project.title}">
+                <div class="work__overlay">
+                    <h3 class="work__title">${project.title}</h3>
+                    <p class="work__description">${project.description}</p>
+                    <span class="work__overlay-text">Show More</span>
+                </div>
+            </div>
+        `).join('');
+
+        // Create or update modals
+        projects.forEach(project => {
+            let modal = document.getElementById(`modal${project.id}`);
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = `modal${project.id}`;
+                modal.className = 'modal';
+                document.body.appendChild(modal);
+            }
+
+            modal.innerHTML = `
+                <div class="modal__content">
+                    <span class="modal__close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+                    <h2 class="modal__title">${project.title}</h2>
+                    <div class="modal__body">
+                        <div class="modal__image">
+                            <img src="${project.imageUrl}" alt="${project.title}">
+                        </div>
+                        <div class="modal__description">
+                            <p>${project.description}</p>
+                            <ul class="modal__features">
+                                ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="modal__actions">
+                            <a href="${project.url}" target="_blank" class="button">
+                                <i class='bx bx-code-alt'></i> View Repository
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Remove modals for deleted projects
+        const allModals = document.querySelectorAll('.modal');
+        allModals.forEach(modal => {
+            const modalId = modal.id;
+            if (modalId.startsWith('modal') && !projects.some(p => `modal${p.id}` === modalId)) {
+                modal.remove();
+            }
+        });
+    }
+
+    // Load contact information
+    function loadContactInfo() {
+        const savedContact = localStorage.getItem('contactData');
+        if (savedContact) {
+            const contactData = JSON.parse(savedContact);
+            
+            // Update email
+            const emailLink = document.querySelector('.contact__detail-item a[href^="mailto:"]');
+            if (emailLink && contactData.email) {
+                emailLink.href = `mailto:${contactData.email}`;
+                emailLink.textContent = contactData.email;
+            }
+            
+            // Update phone
+            const phoneLink = document.querySelector('.contact__detail-item a[href^="tel:"]');
+            if (phoneLink && contactData.phone) {
+                phoneLink.href = `tel:${contactData.phone}`;
+                phoneLink.textContent = contactData.phone;
+            }
+            
+            // Update location
+            const locationLink = document.querySelector('.contact__detail-item a[href^="https://www.google.com/maps"]');
+            if (locationLink && contactData.location) {
+                locationLink.textContent = contactData.location;
+            }
+        }
+    }
+
+    // Load About Me information
+    function loadAboutMe() {
+        const savedAboutMe = localStorage.getItem('aboutMeData');
+        if (savedAboutMe) {
+            const aboutMeData = JSON.parse(savedAboutMe);
+            
+            // Update name
+            const nameElement = document.querySelector('.about__subtitle');
+            if (nameElement && aboutMeData.name) {
+                nameElement.textContent = `I am ${aboutMeData.name}`;
+            }
+            
+            // Update description
+            const descriptionElement = document.querySelector('.about__text');
+            if (descriptionElement && aboutMeData.description) {
+                descriptionElement.textContent = aboutMeData.description;
+            }
+            
+            // Update years of experience
+            const yearsElement = document.querySelector('.about__info-title');
+            if (yearsElement && aboutMeData.yearsExperience) {
+                yearsElement.textContent = `${aboutMeData.yearsExperience}+`;
+            }
+            
+            // Update profile image
+            const profileImage = document.querySelector('.about__img img');
+            if (profileImage && aboutMeData.profileImage) {
+                const imgMatch = aboutMeData.profileImage.match(/src="([^"]+)"/);
+                if (imgMatch) {
+                    profileImage.src = imgMatch[1];
+                }
+            }
+        }
+    }
+
+    // Load Skills information
+    function loadSkills() {
+        const savedSkills = localStorage.getItem('skillsData');
+        if (savedSkills) {
+            const skillsData = JSON.parse(savedSkills);
+            
+            // Update skills container
+            const skillsContainer = document.querySelector('.skills__data');
+            if (skillsContainer) {
+                skillsContainer.innerHTML = skillsData.skills.map((skill, index) => `
+                    <div class="skills__data">
+                        <div class="skills__names">
+                            <i class='bx bxl-${skill.toLowerCase()} skills__icon'></i>
+                            <span class="skills__name">${skill.toUpperCase()}</span>
+                        </div>
+                        <span class="skills__percentage">${skillsData.percentages[index]}%</span>
+                        <div class="skills__bar skills__${skill.toLowerCase()}" style="width: ${skillsData.percentages[index]}%"></div>
+                    </div>
+                `).join('');
+            }
+        }
+    }
+
+    // Load data when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProjects();
+        loadContactInfo();
+        loadAboutMe();
+        loadSkills();
+        
+        // Add storage event listener to update when changes are made in dashboard
+        window.addEventListener('storage', function(e) {
+            if (e.key === 'projects') {
+                loadProjects();
+            } else if (e.key === 'contactData') {
+                loadContactInfo();
+            } else if (e.key === 'aboutMeData') {
+                loadAboutMe();
+            } else if (e.key === 'skillsData') {
+                loadSkills();
+            }
+        });
+    });
+
+    // Load services from localStorage
+    function loadServices() {
+        const servicesContainer = document.querySelector('.services__container');
+        if (!servicesContainer) return;
+
+        const savedServices = localStorage.getItem('services');
+        if (savedServices) {
+            const services = JSON.parse(savedServices);
+            servicesContainer.innerHTML = services.map(service => `
+                <div class="services__card">
+                    <i class='bx ${service.icon} services__icon'></i>
+                    <h3 class="services__title">${service.title}</h3>
+                    <p class="services__description">${service.description}</p>
+                    <ul class="services__list">
+                        <li><i class='bx bx-check-circle'></i> ${service.title} Service</li>
+                        <li><i class='bx bx-check-circle'></i> Professional Quality</li>
+                        <li><i class='bx bx-check-circle'></i> Modern Solutions</li>
+                    </ul>
+                    <a href="#" class="services__button" onclick="event.preventDefault(); document.getElementById('comingSoonModal').style.display='block'">
+                        Learn More <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                </div>
+            `).join('');
+        }
+    }
+
+    // Load services when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadServices();
+    });
+
+    function adjustColor(color, amount) {
+        const hex = color.replace('#', '');
+        const r = Math.max(0, Math.min(255, parseInt(hex.substr(0, 2), 16) + amount));
+        const g = Math.max(0, Math.min(255, parseInt(hex.substr(2, 2), 16) + amount));
+        const b = Math.max(0, Math.min(255, parseInt(hex.substr(4, 2), 16) + amount));
+        return `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}`;
+    }
+
+    function updateColorInDocument(newColor) {
+        // Update all elements with the current primary color
+        const elements = document.querySelectorAll('*');
+        elements.forEach(element => {
+            const style = window.getComputedStyle(element);
+            if (style.color === 'rgb(255, 0, 0)' || style.color === '#ff0000') {
+                element.style.color = newColor;
+            }
+            if (style.backgroundColor === 'rgb(255, 0, 0)' || style.backgroundColor === '#ff0000') {
+                element.style.backgroundColor = newColor;
+            }
+            if (style.borderColor === 'rgb(255, 0, 0)' || style.borderColor === '#ff0000') {
+                element.style.borderColor = newColor;
+            }
+        });
+    }
+
+    function updateImageFilters(newColor) {
+        // Convert hex color to RGB
+        const hex = newColor.replace('#', '');
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+        
+        // Calculate the necessary filter values to match the target color
+        const hueRotation = getHueRotation(r, g, b);
+        const brightness = getBrightness(r, g, b);
+        const contrast = getContrast(r, g, b);
+        
+        // Apply the filter to all images with the theme-color class
+        document.querySelectorAll('img.theme-color').forEach(img => {
+            img.style.filter = `hue-rotate(${hueRotation}deg) brightness(${brightness}) contrast(${contrast})`;
+        });
+    }
+
+    function getHueRotation(r, g, b) {
+        // Calculate hue rotation based on RGB values
+        return Math.round(Math.atan2(b - g, r - g) * (180 / Math.PI));
+    }
+
+    function getBrightness(r, g, b) {
+        // Calculate brightness based on RGB values
+        return Math.round((r + g + b) / (3 * 255) * 100) + '%';
+    }
+
+    function getContrast(r, g, b) {
+        // Calculate contrast based on RGB values
+        return Math.round((Math.max(r, g, b) - Math.min(r, g, b)) / 255 * 100) + '%';
+    }
+
+    // Analytics tracking functions
+    function incrementAnalytics(metric, pageName = null) {
+        let analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+        const today = new Date().toISOString().split('T')[0];
+        
+        if (!analytics[metric]) {
+            analytics[metric] = {};
+        }
+        
+        if (!analytics[metric][today]) {
+            analytics[metric][today] = pageName ? {} : 0;
+        }
+        
+        if (pageName) {
+            if (!analytics[metric][today][pageName]) {
+                analytics[metric][today][pageName] = 0;
+            }
+            analytics[metric][today][pageName]++;
+        } else {
+            analytics[metric][today]++;
+        }
+        
+        localStorage.setItem('siteAnalytics', JSON.stringify(analytics));
+    }
+
+    function updateTimeSpent() {
+        let analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+        const today = new Date().toISOString().split('T')[0];
+        
+        if (!analytics.timeSpent) {
+            analytics.timeSpent = {};
+        }
+        
+        if (!analytics.timeSpent[today]) {
+            analytics.timeSpent[today] = {
+                totalSeconds: 0,
+                visits: 0
+            };
+        }
+        
+        analytics.timeSpent[today].visits++;
+        localStorage.setItem('siteAnalytics', JSON.stringify(analytics));
+        
+        // Update time spent every second
+        let seconds = 0;
+        const timeInterval = setInterval(() => {
+            seconds++;
+            let analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+            if (!analytics.timeSpent[today]) {
+                analytics.timeSpent[today] = { totalSeconds: 0, visits: 1 };
+            }
+            analytics.timeSpent[today].totalSeconds = seconds;
+            localStorage.setItem('siteAnalytics', JSON.stringify(analytics));
+        }, 1000);
+
+        // Clear interval when leaving page
+        window.addEventListener('beforeunload', () => {
+            clearInterval(timeInterval);
+        });
+    }
+
+    // Initialize analytics tracking
+    document.addEventListener('DOMContentLoaded', function() {
+        // Track page view
+        incrementAnalytics('pageViews', 'home');
+        
+        // Track unique visitor
+        const visitorId = localStorage.getItem('visitorId');
+        if (!visitorId) {
+            localStorage.setItem('visitorId', Date.now().toString());
+            incrementAnalytics('uniqueVisitors');
+        }
+        
+        // Start tracking time spent
+        updateTimeSpent();
+        
+        // Track CV downloads
+        document.querySelectorAll('a[href$=".pdf"]').forEach(link => {
+            link.addEventListener('click', () => {
+                incrementAnalytics('cvDownloads');
+            });
+        });
+
+        // Track section views using Intersection Observer
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    incrementAnalytics('pageViews', entry.target.id);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        // Observe all sections
+        document.querySelectorAll('section[id]').forEach(section => {
+            observer.observe(section);
+        });
+    });
     </script>
 </body>
 </html>
