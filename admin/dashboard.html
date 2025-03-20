@@ -2001,9 +2001,10 @@
 
             // Wait for 1 second to show the success message before logout
             setTimeout(() => {
-                // Remove admin authentication and redirect
+                // Remove admin authentication
                 localStorage.removeItem('adminAuth');
-                window.location.href = 'login.html';
+                // Redirect to home page
+                window.location.href = '../index.html';
             }, 1000);
         }
 
