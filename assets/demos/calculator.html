@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #1c1c1c;
+        }
+        
+        .calculator {
+            background: #1c1c1c;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 300px;
+            width: 100%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .display input {
+            width: 100%;
+            padding: 20px;
+            font-size: 24px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        
+        button {
+            padding: 15px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            background: #333;
+            color: white;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        button:hover {
+            background: #444;
+        }
+        
+        .operator {
+            background: #ff002b;
+        }
+        
+        .equals {
+            background: #2ecc71;
+            grid-column: span 2;
+        }
+        
+        .clear {
+            background: #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" readonly>
+        </div>
+        <div class="buttons">
+            <button class="clear">C</button>
+            <button class="operator">/</button>
+            <button class="operator">*</button>
+            <button class="operator">-</button>
+            <button>7</button>
+            <button>8</button>
+            <button>9</button>
+            <button class="operator">+</button>
+            <button>4</button>
+            <button>5</button>
+            <button>6</button>
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>0</button>
+            <button>.</button>
+            <button class="equals">=</button>
+        </div>
+    </div>
+    
+    <script>
+        let display = document.getElementById('result');
+        let buttons = document.querySelectorAll('button');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                if(e.target.textContent === '=') {
+                    try {
+                        display.value = eval(display.value);
+                    } catch {
+                        display.value = 'Error';
+                    }
+                } else if(e.target.textContent === 'C') {
+                    display.value = '';
+                } else {
+                    display.value += e.target.textContent;
+                }
+            });
+        });
+        
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if(e.key >= 0 && e.key <= 9 || e.key === '.' || 
+               e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
+                display.value += e.key;
+            }
+            if(e.key === 'Enter') {
+                try {
+                    display.value = eval(display.value);
+                } catch {
+                    display.value = 'Error';
+                }
+            }
+            if(e.key === 'Escape') {
+                display.value = '';
+            }
+        });
+    </script>
+</body>
+</html> 

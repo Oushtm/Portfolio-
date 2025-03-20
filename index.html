@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Oussama Hatim - IT Developer & Designer specializing in web development and UI/UX design">
     <meta name="keywords" content="web development, UI/UX design, IT developer, Morocco">
     
@@ -31,24 +31,48 @@
     <!--===== HEADER =====-->
     <header class="l-header">
         <nav class="nav bd-grid">
-            <div>
-                <a href="#" class="nav__logo">
-                    Oussama Hatim
-                </a>
-            </div>
+            <a href="#" class="nav__logo">Oussama Hatim</a>
+
             <div class="nav__menu" id="nav-menu">
                 <ul class="nav__list">
-                    <li class="nav__item"><a href="#home" class="nav__link active-link">Home</a></li>
-                    <li class="nav__item"><a href="#about" class="nav__link">About</a></li>
-                    <li class="nav__item"><a href="#skills" class="nav__link">Skills</a></li>
-                    <li class="nav__item"><a href="#work" class="nav__link">Projects</a></li>
-                    <li class="nav__item"><a href="#services" class="nav__link">Services</a></li>
-                    <li class="nav__item"><a href="#contact" class="nav__link">Contact</a></li>
+                    <li class="nav__item">
+                        <a href="#home" class="nav__link active-link">
+                            <i class='bx bx-home'></i> Home
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#about" class="nav__link">
+                            <i class='bx bx-user'></i> About
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#skills" class="nav__link">
+                            <i class='bx bx-book'></i> Skills
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#work" class="nav__link">
+                            <i class='bx bx-briefcase-alt'></i> Work
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="#contact" class="nav__link">
+                            <i class='bx bx-envelope'></i> Contact
+                        </a>
+                    </li>
+                    <li class="nav__item">
+                        <a href="admin/login.html" class="nav__link">
+                            <i class='bx bx-lock-alt'></i> Admin
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <div class="nav__btns">
-                <div class="nav__toggle" id="nav-toggle">
-                    <i class='bx bx-menu'></i>
+
+            <div class="nav__toggle" id="nav-toggle">
+                <div class="hamburger">
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
+                    <span class="hamburger__line"></span>
                 </div>
             </div>
         </nav>
@@ -126,7 +150,7 @@
         <!--===== SKILLS =====-->
         <section class="skills section" id="skills">
             <h2 class="section-title">Skills</h2>
-            <div class="skills__container bd-grid">          
+            <div class="skills__container bd-grid">
                 <div>
                     <h2 class="skills__subtitle">Profesional Skills</h2>
                     <p class="skills__text">As a first-year IT Development student, I have developed a strong foundation in both programming and design. My skills enable me to create efficient, user-friendly digital solutions. Below are the key areas where I excel: </p>
@@ -135,40 +159,35 @@
                             <i class='bx bxl-html5 skills__icon'></i>
                             <span class="skills__name">HTML</span>
                         </div>
+                        <span class="skills__percentage">80%</span>
                         <div class="skills__bar skills__html"></div>
-                        <div>
-                            <span class="skills__percentage">80%</span>
-                        </div>
                     </div>
+
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxl-css3 skills__icon'></i>
                             <span class="skills__name">CSS</span>
                         </div>
+                        <span class="skills__percentage">70%</span>
                         <div class="skills__bar skills__css"></div>
-                        <div>
-                            <span class="skills__percentage">70%</span>
-                        </div>
                     </div>
+
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxl-javascript skills__icon'></i>
                             <span class="skills__name">JAVASCRIPT</span>
                         </div>
+                        <span class="skills__percentage">60%</span>
                         <div class="skills__bar skills__js"></div>
-                        <div>
-                            <span class="skills__percentage">60%</span>
-                        </div>
                     </div>
+
                     <div class="skills__data">
                         <div class="skills__names">
                             <i class='bx bxs-paint skills__icon'></i>
                             <span class="skills__name">UX/UI Design</span>
                         </div>
+                        <span class="skills__percentage">85%</span>
                         <div class="skills__bar skills__ux"></div>
-                        <div>
-                            <span class="skills__percentage">85%</span>
-                        </div>
                     </div>
                 </div>
                 <div>              
@@ -268,151 +287,11 @@
                             <li>Clear and elegant UI</li>
                         </ul>
                     </div>
-                    <!-- Code Tabs -->
-                    <div class="modal__tabs">
-                        <button class="modal__tab active" data-tab="html">HTML</button>
-                        <button class="modal__tab" data-tab="css">CSS</button>
-                        <button class="modal__tab" data-tab="js">JavaScript</button>
-                    </div>
-                    <!-- Code Blocks -->
-                    <div class="modal__code-container">
-                        <div id="html-code" class="modal__code active">
-                            <pre><code class="language-html">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Modern Calculator&lt;/title&gt;
-    &lt;link rel="stylesheet" href="styles.css"&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="calculator"&gt;
-        &lt;div class="display"&gt;
-            &lt;input type="text" id="result" readonly&gt;
-        &lt;/div&gt;
-        &lt;div class="buttons"&gt;
-            &lt;button class="clear"&gt;C&lt;/button&gt;
-            &lt;button class="operator"&gt;/&lt;/button&gt;
-            &lt;button class="operator"&gt;*&lt;/button&gt;
-            &lt;button class="operator"&gt;-&lt;/button&gt;
-            &lt;button&gt;7&lt;/button&gt;
-            &lt;button&gt;8&lt;/button&gt;
-            &lt;button&gt;9&lt;/button&gt;
-            &lt;button class="operator"&gt;+&lt;/button&gt;
-            &lt;button&gt;4&lt;/button&gt;
-            &lt;button&gt;5&lt;/button&gt;
-            &lt;button&gt;6&lt;/button&gt;
-            &lt;button&gt;1&lt;/button&gt;
-            &lt;button&gt;2&lt;/button&gt;
-            &lt;button&gt;3&lt;/button&gt;
-            &lt;button&gt;0&lt;/button&gt;
-            &lt;button&gt;.&lt;/button&gt;
-            &lt;button class="equals"&gt;=&lt;/button&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script src="script.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-                            </code></pre>
-                        </div>
-                        <div id="css-code" class="modal__code">
-                            <pre><code class="language-css">
-.calculator {
-    background: #1c1c1c;
-    border-radius: 10px;
-    padding: 20px;
-    max-width: 300px;
-    margin: 50px auto;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.display input {
-    width: 100%;
-    padding: 20px;
-    font-size: 24px;
-    background: #333;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    text-align: right;
-    margin-bottom: 20px;
-}
-
-.buttons {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-button {
-    padding: 15px;
-    font-size: 18px;
-    border: none;
-    border-radius: 5px;
-    background: #333;
-    color: white;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #444;
-}
-
-.operator {
-    background: #ff002b;
-}
-
-.equals {
-    background: #2ecc71;
-    grid-column: span 2;
-}
-
-.clear {
-    background: #e74c3c;
-}
-                            </code></pre>
-                        </div>
-                        <div id="js-code" class="modal__code">
-                            <pre><code class="language-javascript">
-let display = document.getElementById('result');
-let buttons = document.querySelectorAll('button');
-
-buttons.forEach(button => {
-    button.addEventListener('click', (e) => {
-        if(e.target.textContent === '=') {
-            try {
-                display.value = eval(display.value);
-            } catch {
-                display.value = 'Error';
-            }
-        } else if(e.target.textContent === 'C') {
-            display.value = '';
-        } else {
-            display.value += e.target.textContent;
-        }
-    });
-});
-
-// Keyboard support
-document.addEventListener('keydown', (e) => {
-    if(e.key >= 0 && e.key <= 9 || e.key === '.' || 
-       e.key === '+' || e.key === '-' || e.key === '*' || e.key === '/') {
-        display.value += e.key;
-    }
-    if(e.key === 'Enter') {
-        try {
-            display.value = eval(display.value);
-        } catch {
-            display.value = 'Error';
-        }
-    }
-    if(e.key === 'Escape') {
-        display.value = '';
-    }
-});
-                            </code></pre>
+                    <!-- Demo Section -->
+                    <div class="modal__demo">
+                        <h3 class="modal__subtitle">Live Demo</h3>
+                        <div class="modal__iframe-container">
+                            <iframe src="assets/demos/calculator.html" class="modal__iframe" title="Calculator Demo"></iframe>
                         </div>
                     </div>
                 </div>
@@ -437,211 +316,11 @@ document.addEventListener('keydown', (e) => {
                             <li>Modern animations and transitions</li>
                         </ul>
                     </div>
-                    <!-- Code Tabs -->
-                    <div class="modal__tabs">
-                        <button class="modal__tab active" data-tab="login-html">HTML</button>
-                        <button class="modal__tab" data-tab="login-css">CSS</button>
-                        <button class="modal__tab" data-tab="login-js">JavaScript</button>
-                    </div>
-                    <!-- Code Blocks -->
-                    <div class="modal__code-container">
-                        <div id="login-html-code" class="modal__code active">
-                            <pre><code class="language-html">
-&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;Modern Login&lt;/title&gt;
-    &lt;link rel="stylesheet" href="styles.css"&gt;
-    &lt;link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class="login-container"&gt;
-        &lt;form class="login-form" id="loginForm"&gt;
-            &lt;h2&gt;Welcome Back&lt;/h2&gt;
-            &lt;div class="input-group"&gt;
-                &lt;input type="email" id="email" required&gt;
-                &lt;label&gt;Email&lt;/label&gt;
-                &lt;i class='bx bx-envelope'&gt;&lt;/i&gt;
-            &lt;/div&gt;
-            &lt;div class="input-group"&gt;
-                &lt;input type="password" id="password" required&gt;
-                &lt;label&gt;Password&lt;/label&gt;
-                &lt;i class='bx bx-lock-alt'&gt;&lt;/i&gt;
-                &lt;i class='bx bx-show toggle-password'&gt;&lt;/i&gt;
-            &lt;/div&gt;
-            &lt;div class="remember-forgot"&gt;
-                &lt;label&gt;
-                    &lt;input type="checkbox"&gt; Remember me
-                &lt;/label&gt;
-                &lt;a href="#"&gt;Forgot Password?&lt;/a&gt;
-            &lt;/div&gt;
-            &lt;button type="submit"&gt;Login&lt;/button&gt;
-            &lt;div class="register-link"&gt;
-                &lt;p&gt;Don't have an account? &lt;a href="#"&gt;Register&lt;/a&gt;&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/form&gt;
-    &lt;/div&gt;
-    &lt;script src="script.js"&gt;&lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-                        </div>
-                        <div id="login-css-code" class="modal__code">
-                            <pre><code class="language-css">
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-}
-
-body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: #1c1c1c;
-}
-
-.login-container {
-    width: 100%;
-    max-width: 400px;
-    padding: 40px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.login-form h2 {
-    text-align: center;
-    font-size: 2em;
-    color: #fff;
-    margin-bottom: 30px;
-}
-
-.input-group {
-    position: relative;
-    margin: 30px 0;
-}
-
-.input-group input {
-    width: 100%;
-    padding: 10px 0;
-    font-size: 1em;
-    color: #fff;
-    border: none;
-    border-bottom: 2px solid #fff;
-    outline: none;
-    background: transparent;
-    transition: 0.5s;
-}
-
-.input-group label {
-    position: absolute;
-    top: 50%;
-    left: 5px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: #fff;
-    pointer-events: none;
-    transition: 0.5s;
-}
-
-.input-group input:focus ~ label,
-.input-group input:valid ~ label {
-    top: -5px;
-    font-size: 0.8em;
-    color: #ff002b;
-}
-
-.input-group i {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #fff;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-
-button {
-    width: 100%;
-    padding: 10px 0;
-    background: #ff002b;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1em;
-    transition: 0.3s;
-}
-
-button:hover {
-    background: #cc0023;
-}
-                            </code></pre>
-                        </div>
-                        <div id="login-js-code" class="modal__code">
-                            <pre><code class="language-javascript">
-document.addEventListener('DOMContentLoaded', () => {
-    const loginForm = document.getElementById('loginForm');
-    const togglePassword = document.querySelector('.toggle-password');
-    const passwordInput = document.getElementById('password');
-
-    // Toggle password visibility
-    togglePassword.addEventListener('click', () => {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        togglePassword.classList.toggle('bx-show');
-        togglePassword.classList.toggle('bx-hide');
-    });
-
-    // Form submission
-    loginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        
-        const email = document.getElementById('email').value;
-        const password = passwordInput.value;
-
-        // Basic validation
-        if (!email || !password) {
-            showError('Please fill in all fields');
-            return;
-        }
-
-        if (!isValidEmail(email)) {
-            showError('Please enter a valid email');
-            return;
-        }
-
-        if (password.length < 6) {
-            showError('Password must be at least 6 characters');
-            return;
-        }
-
-        // If validation passes, you would typically send this to a server
-        console.log('Login attempt:', { email, password });
-        showSuccess('Login successful!');
-    });
-
-    // Helper functions
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    function showError(message) {
-        // Add your error handling here
-        alert(message);
-    }
-
-    function showSuccess(message) {
-        // Add your success handling here
-        alert(message);
-    }
-});
-                            </code></pre>
+                    <!-- Demo Section -->
+                    <div class="modal__demo">
+                        <h3 class="modal__subtitle">Live Demo</h3>
+                        <div class="modal__iframe-container">
+                            <iframe src="assets/demos/login.html" class="modal__iframe" title="Login Demo"></iframe>
                         </div>
                     </div>
                 </div>
@@ -764,10 +443,30 @@ document.addEventListener('DOMContentLoaded', () => {
         // Menu toggle
         const navToggle = document.getElementById('nav-toggle');
         const navMenu = document.getElementById('nav-menu');
+        const body = document.body;
         
         if (navToggle && navMenu) {
             navToggle.addEventListener('click', function() {
                 navMenu.classList.toggle('show');
+                navToggle.classList.toggle('show');
+                
+                // Prevent background scrolling when menu is open
+                if (navMenu.classList.contains('show')) {
+                    body.style.overflow = 'hidden';
+                } else {
+                    body.style.overflow = '';
+                }
+            });
+            
+            // Close menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (navMenu.classList.contains('show') && 
+                    !navMenu.contains(e.target) && 
+                    !navToggle.contains(e.target)) {
+                    navMenu.classList.remove('show');
+                    navToggle.classList.remove('show');
+                    body.style.overflow = '';
+                }
             });
         }
 
@@ -777,62 +476,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
         function scrollActive() {
             const scrollY = window.pageYOffset;
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight;
 
+            // First remove active-link class from all links
+            navLinks.forEach(link => link.classList.remove('active-link'));
+
+            // Special handling for contact section when at bottom of page
+            if ((window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 50) {
+                document.querySelector('.nav__link[href="#contact"]').classList.add('active-link');
+                return;
+            }
+
+            // Handle other sections
             sections.forEach(current => {
                 const sectionHeight = current.offsetHeight;
-                const sectionTop = current.offsetTop - 50;
+                const sectionTop = current.offsetTop - 100;
                 const sectionId = current.getAttribute('id');
+                const currentLink = document.querySelector('.nav__link[href="#' + sectionId + '"]');
 
-                if(scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                    document.querySelector('.nav__link[href*=' + sectionId + ']').classList.add('active-link');
-                } else {
-                    document.querySelector('.nav__link[href*=' + sectionId + ']').classList.remove('active-link');
+                if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                    currentLink.classList.add('active-link');
                 }
             });
         }
 
         window.addEventListener('scroll', scrollActive);
-        
-        // Nav link click handling
-        navLinks.forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                // Get the target section id from the href
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
-                
-                // Smooth scroll to target section
-                targetSection.scrollIntoView({ behavior: 'smooth' });
-                
-                // Close mobile menu
-                if (navMenu) {
-                    navMenu.classList.remove('show');
-                }
-            });
-        });
-        
-        // Project modal functionality
-        const workItems = document.querySelectorAll('.work__item');
-        const modals = document.querySelectorAll('.modal');
-        const modalCloses = document.querySelectorAll('.modal__close');
-        
-        workItems.forEach((item, index) => {
-            item.addEventListener('click', function() {
-                if (modals[index]) {
-                    modals[index].style.display = 'block';
-                }
-            });
-        });
-        
-        modalCloses.forEach(close => {
-            close.addEventListener('click', function(e) {
-                e.preventDefault();
-                modals.forEach(modal => {
-                    modal.style.display = 'none';
-                });
-            });
-        });
+        // Initial check for active section
+        scrollActive();
     });
 
     // Initialize ScrollReveal for animations if it exists
@@ -889,22 +560,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 1000);
             }
         }, 120000); // 2 minutes
-    });
-
-    // Modal tabs functionality
-    document.querySelectorAll('.modal__tab').forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active class from all tabs and code blocks
-            document.querySelectorAll('.modal__tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.modal__code').forEach(c => c.classList.remove('active'));
-            
-            // Add active class to clicked tab
-            tab.classList.add('active');
-            
-            // Show corresponding code block
-            const codeId = tab.getAttribute('data-tab') + '-code';
-            document.getElementById(codeId).classList.add('active');
-        });
     });
 
     // Handle form submission

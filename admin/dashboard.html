@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Oussama Hatim</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <style>
+        :root {
+            --sidebar-width: 240px;
+        }
+        
+        body {
+            background-color: var(--second-color);
+            padding: 0;
+            margin: 0;
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: #111;
+            padding: 1.5rem 0;
+            height: 100vh;
+            position: fixed;
+            transition: 0.3s;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .sidebar__brand {
+            padding: 0 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar__brand h2 {
+            color: var(--first-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .sidebar__menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar__item {
+            padding: 0.75rem 1.5rem;
+            margin-bottom: 0.25rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .sidebar__item:hover {
+            background-color: rgba(255, 0, 43, 0.1);
+        }
+        
+        .sidebar__item.active {
+            background-color: rgba(255, 0, 43, 0.15);
+            border-left: 4px solid var(--first-color);
+        }
+        
+        .sidebar__link {
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+        
+        .sidebar__link i {
+            font-size: 1.25rem;
+        }
+        
+        .sidebar__toggle {
+            position: absolute;
+            top: 1rem;
+            right: -12px;
+            background-color: var(--first-color);
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Main Content */
+        .main-content {
+            margin-left: var(--sidebar-width);
+            width: calc(100% - var(--sidebar-width));
+            padding: 2rem;
+            transition: 0.3s;
+        }
+        
+        .page-title {
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .page-title h1 {
+            color: var(--text-color);
+            font-size: 1.75rem;
+        }
+        
+        .logout-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: 0.3s;
+        }
+        
+        .logout-btn:hover {
+            background-color: var(--first-color);
+            color: #fff;
+            border-color: var(--first-color);
+        }
+        
+        /* Dashboard Pages */
+        .dashboard-page {
+            display: none;
+        }
+        
+        .dashboard-page.active {
+            display: block;
+        }
+        
+        /* Card Styles */
+        .card {
+            background-color: #1a1a1a;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card__title {
+            margin-top: 0;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #333;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card__button {
+            background-color: var(--first-color);
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.875rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        /* Table Styles */
+        .admin-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .admin-table th, 
+        .admin-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        
+        .admin-table th {
+            color: var(--text-color);
+            font-weight: 600;
+        }
+        
+        .admin-table td {
+            color: #ddd;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .action-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: none;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .action-btn.edit {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+        
+        .action-btn.delete {
+            background-color: rgba(231, 76, 60, 0.2);
+            color: #e74c3c;
+        }
+        
+        /* Form Styles */
+        .admin-form {
+            display: none;
+            margin-top: 1rem;
+        }
+        
+        .form-row {
+            margin-bottom: 1rem;
+        }
+        
+        .form-row label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .form-row input,
+        .form-row textarea,
+        .form-row select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #333;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 4px;
+            color: var(--text-color);
+        }
+        
+        .form-row textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .form-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .cancel-btn {
+            background-color: transparent;
+            color: var(--text-color);
+            border: 1px solid #333;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .submit-btn {
+            background-color: var(--first-color);
+            color: #fff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        /* For smaller screens */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 0;
+                padding: 1.5rem 0;
+                z-index: 100;
+            }
+            
+            .sidebar.collapsed {
+                width: var(--sidebar-width);
+            }
+            
+            .main-content {
+                margin-left: 0;
+                width: 100%;
+            }
+            
+            .main-content.pushed {
+                margin-left: var(--sidebar-width);
+                width: calc(100% - var(--sidebar-width));
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 101;
+                background-color: var(--first-color);
+                color: #fff;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar__brand">
+            <h2><i class='bx bxs-dashboard'></i> Admin Panel</h2>
+        </div>
+        <ul class="sidebar__menu">
+            <li class="sidebar__item active" data-page="dashboard">
+                <a href="#" class="sidebar__link">
+                    <i class='bx bxs-home'></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="sidebar__item" data-page="projects">
+                <a href="#" class="sidebar__link">
+                    <i class='bx bxs-briefcase'></i>
+                    <span>Projects</span>
+                </a>
+            </li>
+            <li class="sidebar__item" data-page="services">
+                <a href="#" class="sidebar__link">
+                    <i class='bx bxs-server'></i>
+                    <span>Services</span>
+                </a>
+            </li>
+            <li class="sidebar__item" data-page="settings">
+                <a href="#" class="sidebar__link">
+                    <i class='bx bxs-cog'></i>
+                    <span>Settings</span>
+                </a>
+            </li>
+            <li class="sidebar__item">
+                <a href="../index.html" class="sidebar__link">
+                    <i class='bx bx-globe'></i>
+                    <span>View Website</span>
+                </a>
+            </li>
+        </ul>
+        <div class="sidebar__toggle" id="sidebarToggle">
+            <i class='bx bx-chevron-left'></i>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <i class='bx bx-menu'></i>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <div class="page-title">
+            <h1>Dashboard</h1>
+            <button class="logout-btn" id="logoutBtn">
+                <i class='bx bx-log-out'></i> Logout
+            </button>
+        </div>
+
+        <!-- Dashboard Overview -->
+        <div class="dashboard-page active" id="dashboardPage">
+            <div class="card">
+                <h2 class="card__title">Welcome Back, Admin</h2>
+                <p>Use this admin panel to manage your website content. You can add, edit, or delete projects and services from here.</p>
+                <div style="margin-top: 1.5rem;">
+                    <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                        <div style="background-color: rgba(255, 0, 43, 0.15); padding: 1.5rem; border-radius: 8px; flex: 1;">
+                            <h3 style="margin-top: 0; color: var(--text-color);">Projects</h3>
+                            <p style="font-size: 2rem; font-weight: 600; color: var(--first-color); margin: 0.5rem 0;">2</p>
+                            <a href="#" style="color: var(--text-color); display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;" class="nav-to-page" data-target="projects">
+                                Manage Projects <i class='bx bx-right-arrow-alt'></i>
+                            </a>
+                        </div>
+                        <div style="background-color: rgba(255, 0, 43, 0.15); padding: 1.5rem; border-radius: 8px; flex: 1;">
+                            <h3 style="margin-top: 0; color: var(--text-color);">Services</h3>
+                            <p style="font-size: 2rem; font-weight: 600; color: var(--first-color); margin: 0.5rem 0;">3</p>
+                            <a href="#" style="color: var(--text-color); display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;" class="nav-to-page" data-target="services">
+                                Manage Services <i class='bx bx-right-arrow-alt'></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Management -->
+        <div class="dashboard-page" id="projectsPage">
+            <div class="card">
+                <h2 class="card__title">
+                    Manage Projects
+                    <button class="card__button" id="addProjectBtn">
+                        <i class='bx bx-plus'></i> Add Project
+                    </button>
+                </h2>
+                
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Image</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="projectsTableBody">
+                        <tr>
+                            <td>Calculator Project</td>
+                            <td>work1.jpg</td>
+                            <td>A modern calculator application...</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit" onclick="editProject(1)"><i class='bx bx-edit'></i></button>
+                                    <button class="action-btn delete" onclick="deleteProject(1)"><i class='bx bx-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Login Project</td>
+                            <td>work2.jpg</td>
+                            <td>A secure and responsive login interface...</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit" onclick="editProject(2)"><i class='bx bx-edit'></i></button>
+                                    <button class="action-btn delete" onclick="deleteProject(2)"><i class='bx bx-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Add/Edit Project Form -->
+                <div class="admin-form" id="projectForm">
+                    <h3 id="projectFormTitle">Add New Project</h3>
+                    <form id="addEditProjectForm">
+                        <input type="hidden" id="projectId" value="">
+                        
+                        <div class="form-row">
+                            <label for="projectTitle">Project Title</label>
+                            <input type="text" id="projectTitle" name="title" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="projectImage">Image URL</label>
+                            <input type="text" id="projectImage" name="image" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="projectDescription">Description</label>
+                            <textarea id="projectDescription" name="description" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="projectFeatures">Features (one per line)</label>
+                            <textarea id="projectFeatures" name="features"></textarea>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="cancel-btn" id="cancelProjectBtn">Cancel</button>
+                            <button type="submit" class="submit-btn">Save Project</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Management -->
+        <div class="dashboard-page" id="servicesPage">
+            <div class="card">
+                <h2 class="card__title">
+                    Manage Services
+                    <button class="card__button" id="addServiceBtn">
+                        <i class='bx bx-plus'></i> Add Service
+                    </button>
+                </h2>
+                
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Icon</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                        <tr>
+                            <td>Web Development</td>
+                            <td>bx-code-alt</td>
+                            <td>Creating responsive and modern websites...</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit" onclick="editService(1)"><i class='bx bx-edit'></i></button>
+                                    <button class="action-btn delete" onclick="deleteService(1)"><i class='bx bx-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>UI/UX Design</td>
+                            <td>bx-palette</td>
+                            <td>Designing intuitive and beautiful user interfaces...</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit" onclick="editService(2)"><i class='bx bx-edit'></i></button>
+                                    <button class="action-btn delete" onclick="deleteService(2)"><i class='bx bx-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mobile Development</td>
+                            <td>bx-mobile-alt</td>
+                            <td>Building cross-platform mobile applications...</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn edit" onclick="editService(3)"><i class='bx bx-edit'></i></button>
+                                    <button class="action-btn delete" onclick="deleteService(3)"><i class='bx bx-trash'></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Add/Edit Service Form -->
+                <div class="admin-form" id="serviceForm">
+                    <h3 id="serviceFormTitle">Add New Service</h3>
+                    <form id="addEditServiceForm">
+                        <input type="hidden" id="serviceId" value="">
+                        
+                        <div class="form-row">
+                            <label for="serviceTitle">Service Title</label>
+                            <input type="text" id="serviceTitle" name="title" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="serviceIcon">Icon Class (boxicons)</label>
+                            <input type="text" id="serviceIcon" name="icon" placeholder="bx-code-alt" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="serviceDescription">Description</label>
+                            <textarea id="serviceDescription" name="description" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <label for="serviceFeatures">Features (one per line)</label>
+                            <textarea id="serviceFeatures" name="features"></textarea>
+                        </div>
+                        
+                        <div class="form-buttons">
+                            <button type="button" class="cancel-btn" id="cancelServiceBtn">Cancel</button>
+                            <button type="submit" class="submit-btn">Save Service</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Page -->
+        <div class="dashboard-page" id="settingsPage">
+            <div class="card">
+                <h2 class="card__title">Settings</h2>
+                
+                <form id="settingsForm">
+                    <div class="form-row">
+                        <label for="siteTitle">Site Title</label>
+                        <input type="text" id="siteTitle" name="siteTitle" value="Oussama Hatim | IT Developer & Designer">
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="siteDescription">Site Description</label>
+                        <textarea id="siteDescription" name="siteDescription">Oussama Hatim - IT Developer & Designer specializing in web development and UI/UX design</textarea>
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="emailAddress">Contact Email</label>
+                        <input type="email" id="emailAddress" name="emailAddress" value="oussamahatim2006@gmail.com">
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" id="phoneNumber" name="phoneNumber" value="+212 615376665">
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="linkedinUrl">LinkedIn URL</label>
+                        <input type="url" id="linkedinUrl" name="linkedinUrl" value="https://linkedin.com/in/oussama-hatim-780a7b356">
+                    </div>
+                    
+                    <div class="form-row">
+                        <label for="githubUrl">GitHub URL</label>
+                        <input type="url" id="githubUrl" name="githubUrl" value="https://github.com/Oushtm">
+                    </div>
+                    
+                    <div class="form-buttons">
+                        <button type="submit" class="submit-btn">Save Settings</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auth Check
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            const isAuthenticated = localStorage.getItem('adminAuth') === 'true';
+            
+            if (!isAuthenticated) {
+                // If not authenticated, redirect to login page
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Handle logout
+            document.getElementById('logoutBtn').addEventListener('click', function() {
+                localStorage.removeItem('adminAuth');
+                window.location.href = 'login.html';
+            });
+            
+            // Sidebar navigation
+            const sidebarItems = document.querySelectorAll('.sidebar__item[data-page]');
+            const dashboardPages = document.querySelectorAll('.dashboard-page');
+            const pageTitle = document.querySelector('.page-title h1');
+            
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const targetPage = this.getAttribute('data-page');
+                    
+                    // Update active sidebar item
+                    sidebarItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show target page
+                    dashboardPages.forEach(page => page.classList.remove('active'));
+                    document.getElementById(targetPage + 'Page').classList.add('active');
+                    
+                    // Update page title
+                    pageTitle.textContent = this.querySelector('span').textContent;
+                });
+            });
+            
+            // Also allow navigation from dashboard card links
+            document.querySelectorAll('.nav-to-page').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetPage = this.getAttribute('data-target');
+                    
+                    // Find and click the corresponding sidebar item
+                    document.querySelector(`.sidebar__item[data-page="${targetPage}"]`).click();
+                });
+            });
+            
+            // Toggle sidebar
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            
+            function toggleSidebar() {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('pushed');
+            }
+            
+            sidebarToggle.addEventListener('click', toggleSidebar);
+            mobileMenuToggle.addEventListener('click', toggleSidebar);
+            
+            // Projects Management
+            const addProjectBtn = document.getElementById('addProjectBtn');
+            const projectForm = document.getElementById('projectForm');
+            const projectFormTitle = document.getElementById('projectFormTitle');
+            const cancelProjectBtn = document.getElementById('cancelProjectBtn');
+            
+            addProjectBtn.addEventListener('click', function() {
+                projectFormTitle.textContent = 'Add New Project';
+                document.getElementById('projectId').value = '';
+                document.getElementById('addEditProjectForm').reset();
+                projectForm.style.display = 'block';
+            });
+            
+            cancelProjectBtn.addEventListener('click', function() {
+                projectForm.style.display = 'none';
+            });
+            
+            document.getElementById('addEditProjectForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const projectId = document.getElementById('projectId').value;
+                const isEditing = projectId !== '';
+                
+                // Get form data
+                const projectData = {
+                    id: isEditing ? projectId : (new Date()).getTime(), // Use timestamp as ID
+                    title: document.getElementById('projectTitle').value,
+                    image: document.getElementById('projectImage').value,
+                    description: document.getElementById('projectDescription').value,
+                    features: document.getElementById('projectFeatures').value.split('\n').filter(f => f.trim() !== '')
+                };
+                
+                // In a real app, you would send this data to a server
+                console.log('Saving project:', projectData);
+                
+                // For demo purposes, we'll just show a success message
+                alert(`Project ${isEditing ? 'updated' : 'added'} successfully!`);
+                
+                // Hide the form
+                projectForm.style.display = 'none';
+                
+                // In a real app, you would refresh the table with updated data
+            });
+            
+            // Services Management
+            const addServiceBtn = document.getElementById('addServiceBtn');
+            const serviceForm = document.getElementById('serviceForm');
+            const serviceFormTitle = document.getElementById('serviceFormTitle');
+            const cancelServiceBtn = document.getElementById('cancelServiceBtn');
+            
+            addServiceBtn.addEventListener('click', function() {
+                serviceFormTitle.textContent = 'Add New Service';
+                document.getElementById('serviceId').value = '';
+                document.getElementById('addEditServiceForm').reset();
+                serviceForm.style.display = 'block';
+            });
+            
+            cancelServiceBtn.addEventListener('click', function() {
+                serviceForm.style.display = 'none';
+            });
+            
+            document.getElementById('addEditServiceForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const serviceId = document.getElementById('serviceId').value;
+                const isEditing = serviceId !== '';
+                
+                // Get form data
+                const serviceData = {
+                    id: isEditing ? serviceId : (new Date()).getTime(), // Use timestamp as ID
+                    title: document.getElementById('serviceTitle').value,
+                    icon: document.getElementById('serviceIcon').value,
+                    description: document.getElementById('serviceDescription').value,
+                    features: document.getElementById('serviceFeatures').value.split('\n').filter(f => f.trim() !== '')
+                };
+                
+                // In a real app, you would send this data to a server
+                console.log('Saving service:', serviceData);
+                
+                // For demo purposes, we'll just show a success message
+                alert(`Service ${isEditing ? 'updated' : 'added'} successfully!`);
+                
+                // Hide the form
+                serviceForm.style.display = 'none';
+                
+                // In a real app, you would refresh the table with updated data
+            });
+            
+            // Settings form
+            document.getElementById('settingsForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Get form data
+                const settingsData = {
+                    siteTitle: document.getElementById('siteTitle').value,
+                    siteDescription: document.getElementById('siteDescription').value,
+                    emailAddress: document.getElementById('emailAddress').value,
+                    phoneNumber: document.getElementById('phoneNumber').value,
+                    linkedinUrl: document.getElementById('linkedinUrl').value,
+                    githubUrl: document.getElementById('githubUrl').value
+                };
+                
+                // In a real app, you would send this data to a server
+                console.log('Saving settings:', settingsData);
+                
+                // For demo purposes, we'll just show a success message
+                alert('Settings saved successfully!');
+            });
+        });
+        
+        // Project edit and delete functions
+        function editProject(id) {
+            // In a real app, you would fetch the project data from a server
+            const projectData = {
+                id: id,
+                title: id === 1 ? 'Calculator Project' : 'Login Project',
+                image: id === 1 ? 'work1.jpg' : 'work2.jpg',
+                description: id === 1 ? 'A modern calculator application...' : 'A secure and responsive login interface...',
+                features: id === 1 ? 
+                    ['Basic arithmetic operations', 'Keyboard input support', 'Responsive design', 'Clear and elegant UI'] : 
+                    ['Client-side form validation', 'Password visibility toggle', 'Responsive design', 'Modern animations']
+            };
+            
+            // Populate the form
+            document.getElementById('projectId').value = projectData.id;
+            document.getElementById('projectTitle').value = projectData.title;
+            document.getElementById('projectImage').value = projectData.image;
+            document.getElementById('projectDescription').value = projectData.description;
+            document.getElementById('projectFeatures').value = projectData.features.join('\n');
+            
+            // Update form title and show the form
+            document.getElementById('projectFormTitle').textContent = 'Edit Project';
+            document.getElementById('projectForm').style.display = 'block';
+        }
+        
+        function deleteProject(id) {
+            if (confirm('Are you sure you want to delete this project?')) {
+                // In a real app, you would send a request to delete the project
+                console.log('Deleting project with ID:', id);
+                
+                // For demo purposes, we'll just show a success message
+                alert('Project deleted successfully!');
+                
+                // In a real app, you would refresh the table with updated data
+            }
+        }
+        
+        // Service edit and delete functions
+        function editService(id) {
+            // In a real app, you would fetch the service data from a server
+            const serviceData = {
+                id: id,
+                title: id === 1 ? 'Web Development' : (id === 2 ? 'UI/UX Design' : 'Mobile Development'),
+                icon: id === 1 ? 'bx-code-alt' : (id === 2 ? 'bx-palette' : 'bx-mobile-alt'),
+                description: id === 1 ? 
+                    'Creating responsive and modern websites...' : 
+                    (id === 2 ? 'Designing intuitive and beautiful user interfaces...' : 'Building cross-platform mobile applications...'),
+                features: id === 1 ? 
+                    ['Custom Website Development', 'Responsive Design', 'Performance Optimization'] : 
+                    (id === 2 ? ['User Interface Design', 'User Experience Design', 'Prototyping & Wireframes'] : 
+                    ['iOS & Android Apps', 'Cross-platform Solutions', 'App Maintenance'])
+            };
+            
+            // Populate the form
+            document.getElementById('serviceId').value = serviceData.id;
+            document.getElementById('serviceTitle').value = serviceData.title;
+            document.getElementById('serviceIcon').value = serviceData.icon;
+            document.getElementById('serviceDescription').value = serviceData.description;
+            document.getElementById('serviceFeatures').value = serviceData.features.join('\n');
+            
+            // Update form title and show the form
+            document.getElementById('serviceFormTitle').textContent = 'Edit Service';
+            document.getElementById('serviceForm').style.display = 'block';
+        }
+        
+        function deleteService(id) {
+            if (confirm('Are you sure you want to delete this service?')) {
+                // In a real app, you would send a request to delete the service
+                console.log('Deleting service with ID:', id);
+                
+                // For demo purposes, we'll just show a success message
+                alert('Service deleted successfully!');
+                
+                // In a real app, you would refresh the table with updated data
+            }
+        }
+    </script>
+</body>
+</html> 
