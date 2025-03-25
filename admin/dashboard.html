@@ -1,0 +1,2251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Oussama Hatim</title>
+    <link href='https://cdn.jsdelivr.net/npm/boxicons@2.0.5/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --first-color: #FF0000;
+            --first-color-alt: #cc0000;
+            --first-color-lighter: rgba(255, 0, 0, 0.1);
+            --title-color: #fff;
+            --text-color: #f4f4f4;
+            --text-color-light: #aaa;
+            --body-color: #000000;
+            --container-color: #111111;
+            --input-color: #1a1a1a;
+            --border-color: #333333;
+            --sidebar-width: 280px;
+            --header-height: 4rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--body-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Dashboard Layout */
+        .dashboard {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            width: 100%;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            background: var(--container-color);
+            width: var(--sidebar-width);
+            height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 2rem 1.5rem;
+            transition: .4s;
+            z-index: 100;
+            border-right: 1px solid var(--border-color);
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            column-gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-header img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--first-color);
+            padding: 2px;
+        }
+
+        .sidebar-header h2 {
+            color: var(--first-color);
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            row-gap: .5rem;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-radius: .5rem;
+            color: var(--text-color);
+            transition: .3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-link i {
+            font-size: 1.25rem;
+            margin-right: 1rem;
+            color: var(--first-color);
+        }
+
+        .nav-link:hover {
+            background-color: var(--first-color-lighter);
+            color: var(--first-color);
+        }
+
+        .nav-link.active {
+            background-color: var(--first-color);
+            color: var(--title-color);
+        }
+
+        .nav-link.active i {
+            color: var(--title-color);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: var(--sidebar-width);
+            min-height: 100vh;
+            width: calc(100% - var(--sidebar-width));
+            padding: 2rem;
+            background: var(--body-color);
+        }
+
+        .header {
+            background: var(--container-color);
+            padding: 1rem 2rem;
+            border-radius: 0;
+            margin: -2rem -2rem 2rem -2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: var(--title-color);
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        .logout-btn {
+            background: var(--first-color);
+            color: var(--title-color);
+            padding: .75rem 1.5rem;
+            border-radius: .5rem;
+            border: none;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .logout-btn:hover {
+            background: var(--first-color-alt);
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        .section {
+            background: var(--container-color);
+            padding: 2rem;
+            border-radius: 0;
+            margin: 0 -2rem 2rem -2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .section-title {
+            color: var(--first-color);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            background: var(--input-color);
+            border: 1px solid var(--border-color);
+            border-radius: .5rem;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: .3s;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Image Upload */
+        .image-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: .5rem;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: .3s;
+            background: var(--input-color);
+            margin-bottom: 1rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .image-upload:hover {
+            border-color: var(--first-color);
+            background: var(--first-color-lighter);
+        }
+
+        .image-upload i {
+            font-size: 2.5rem;
+            color: var(--first-color);
+            margin-bottom: .5rem;
+        }
+
+        .image-upload p {
+            color: var(--text-color-light);
+            font-size: 1rem;
+        }
+
+        .image-preview {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid var(--first-color);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-item .remove-btn {
+            position: absolute;
+            top: .5rem;
+            right: .5rem;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--first-color);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: .3s;
+            z-index: 1;
+        }
+
+        .preview-item .remove-btn:hover {
+            transform: scale(1.1);
+            background: var(--first-color-alt);
+        }
+
+        /* Save Button */
+        .save-btn {
+            background: var(--first-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: .5rem;
+            border: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: .75rem;
+            cursor: pointer;
+            transition: .3s;
+            margin-top: 1rem;
+        }
+
+        .save-btn:hover {
+            background: var(--first-color-alt);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(255, 0, 0, 0.3);
+        }
+
+        .save-btn i {
+            font-size: 1.25rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            color: var(--first-color);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 1024px) {
+            :root {
+                --sidebar-width: 250px;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            :root {
+                --sidebar-width: 0;
+            }
+
+            .dashboard {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                transform: translateX(-100%);
+                width: 270px;
+            }
+
+            .sidebar.active {
+                transform: translateX(0);
+            }
+
+        .main-content {
+                margin-left: 0;
+                width: 100%;
+                padding: 1rem;
+            }
+
+            .header {
+                margin: -1rem -1rem 1rem -1rem;
+                padding: 1rem;
+            }
+
+            .section {
+                margin: 0 -1rem 1rem -1rem;
+            padding: 1.5rem;
+            }
+
+            .form-control {
+                font-size: 16px;
+            }
+
+            .image-upload {
+            padding: 2rem;
+            }
+
+            .image-preview {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 1rem;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--container-color);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--first-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--first-color-alt);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        /* Additional styles for new sections */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .project-card {
+            background: var(--input-color);
+            border-radius: .5rem;
+            overflow: hidden;
+            transition: .3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+
+        .project-card h3 {
+            padding: 1rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .project-actions {
+            padding: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-actions button {
+            flex: 1;
+            padding: .5rem;
+            border: none;
+            border-radius: .3rem;
+            background: var(--first-color-lighter);
+            color: var(--first-color);
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+        }
+
+        .project-actions button:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            border-radius: .5rem;
+            margin-top: 1rem;
+        }
+
+        /* Add styles for social links */
+        .social-links {
+            display: grid;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        .social-links input {
+            width: 100%;
+        }
+
+        @media screen and (min-width: 768px) {
+            .social-links {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        /* Enhanced Project Card Styles */
+        .project-card {
+            background: var(--input-color);
+            border-radius: .5rem;
+            overflow: hidden;
+            transition: .3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .project-info {
+            padding: 1rem;
+            flex: 1;
+        }
+
+        .project-info h3 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .project-info p {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-link {
+            color: var(--first-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            transition: .3s;
+        }
+
+        .project-link:hover {
+            color: var(--first-color-alt);
+        }
+
+        .project-actions {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-actions button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .edit-btn {
+            background: var(--first-color-lighter);
+            color: var(--first-color);
+        }
+
+        .delete-btn {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--first-color);
+        }
+
+        .edit-btn:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        .delete-btn:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        /* Skills Preview Styles */
+        .skills-preview {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+
+        .skill-item {
+            margin-bottom: 1.5rem;
+            max-width: 600px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            width: 100%;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: var(--input-color);
+            border-radius: 4px;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .skill-percentage {
+            height: 100%;
+            background: var(--first-color);
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        /* Mobile Responsive Fixes */
+        @media screen and (max-width: 768px) {
+            .skills-preview {
+                padding: 0;
+                width: 100%;
+            }
+
+            .skill-item {
+                width: 100%;
+                padding: 0 1rem;
+            }
+
+            .skill-info {
+            display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            align-items: center;
+                text-align: left;
+            gap: 1rem;
+                width: 100%;
+            }
+
+            .skill-info span:first-child {
+                flex: 1;
+            }
+
+            .skill-info span:last-child {
+                min-width: 45px;
+                text-align: right;
+            }
+
+            .skill-bar {
+            width: 100%;
+            }
+        }
+
+        .project-image-container {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover .project-image-container img {
+            transform: scale(1.05);
+        }
+
+        .project-info {
+            padding: 1.5rem;
+        }
+
+        .project-info h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--first-color);
+        }
+
+        .project-info p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--first-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--first-color-alt);
+        }
+
+        .project-actions {
+            padding: 1rem 1.5rem;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-actions button {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        /* Add Work section styles */
+        .work-list {
+            margin-top: 2rem;
+        }
+
+        .work-item {
+            background: var(--input-color);
+            padding: 1.5rem;
+            border-radius: .5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .work-item h3 {
+            color: var(--first-color);
+            margin-bottom: .5rem;
+        }
+
+        .work-company {
+            font-weight: 500;
+            margin-bottom: .5rem;
+        }
+
+        .work-duration {
+            color: var(--text-color-light);
+            font-size: .9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .work-description {
+            margin-bottom: 1rem;
+        }
+
+        .work-responsibilities {
+            list-style: none;
+            padding-left: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .work-responsibilities li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: .5rem;
+        }
+
+        .work-responsibilities li::before {
+            content: "•";
+            color: var(--first-color);
+            position: absolute;
+            left: 0;
+        }
+
+        .work-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .work-actions button {
+            flex: 1;
+            padding: .5rem;
+            border: none;
+            border-radius: .3rem;
+            cursor: pointer;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+        }
+
+        .work-actions .edit-btn {
+            background: var(--first-color-lighter);
+            color: var(--first-color);
+        }
+
+        .work-actions .delete-btn {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--first-color);
+        }
+
+        .work-actions .edit-btn:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        .work-actions .delete-btn:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        /* Add Service section styles */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .service-card {
+            background: var(--input-color);
+            padding: 1.5rem;
+            border-radius: .5rem;
+            transition: .3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+        }
+
+        .service-icon {
+            font-size: 2rem;
+            color: var(--first-color);
+            margin-bottom: 1rem;
+        }
+
+        .service-info h3 {
+            color: var(--text-color);
+            margin-bottom: .5rem;
+        }
+
+        .service-info p {
+            color: var(--text-color-light);
+            font-size: .9rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .service-actions button {
+            flex: 1;
+            padding: .5rem;
+            border: none;
+            border-radius: .3rem;
+            cursor: pointer;
+            transition: .3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            gap: .5rem;
+        }
+
+        .service-actions .edit-btn {
+            background: var(--first-color-lighter);
+            color: var(--first-color);
+        }
+
+        .service-actions .delete-btn {
+            background: rgba(255, 0, 0, 0.1);
+            color: var(--first-color);
+        }
+
+        .service-actions .edit-btn:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        .service-actions .delete-btn:hover {
+            background: var(--first-color);
+            color: var(--title-color);
+        }
+
+        /* Update the custom alert styles */
+        .custom-alert {
+                position: fixed;
+            bottom: 20px;
+            left: 20px;
+            padding: 20px 25px;
+            border-radius: 8px;
+            color: var(--text-color);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.2);
+            transform: translateY(150%);
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 9999;
+            max-width: 400px;
+            background: var(--container-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .custom-alert.success {
+            background: var(--container-color);
+            border-left: 4px solid var(--first-color);
+        }
+
+        .custom-alert.error {
+            background: var(--container-color);
+            border-left: 4px solid #dc3545;
+        }
+
+        .custom-alert.show {
+            transform: translateY(0);
+        }
+
+        .custom-alert i {
+            font-size: 24px;
+            color: var(--first-color);
+            animation: alertIcon 0.5s ease-in-out;
+        }
+
+        .custom-alert .alert-content {
+            flex: 1;
+        }
+
+        .custom-alert .alert-title {
+            color: var(--text-color);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .custom-alert .alert-message {
+            color: var(--text-color-light);
+            font-size: 0.9rem;
+        }
+
+        @keyframes alertIcon {
+            0% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Update the resetAnalytics function */
+        function resetAnalytics() {
+            if (confirm('Are you sure you want to reset all analytics data? This cannot be undone.')) {
+                // Clear all analytics data from localStorage
+                localStorage.setItem('siteAnalytics', JSON.stringify({
+                    pageViews: {},
+                    uniqueVisitors: {},
+                    timeSpent: {},
+                    cvDownloads: {}
+                }));
+                localStorage.removeItem('visitorId');
+                
+                // Update analytics cards
+                updateAnalyticsCards();
+                
+                // Update traffic chart
+                updateTrafficChart();
+                
+                // Reset Top Pages table explicitly
+                const tbody = document.querySelector('.analytics__table tbody');
+                tbody.innerHTML = '<tr><td colspan="3">No data available</td></tr>';
+                
+                // Show success alert with animation
+                const alert = document.getElementById('customAlert');
+                alert.innerHTML = `
+                    <i class='bx bx-check-circle'></i>
+                    <div class="alert-content">
+                        <div class="alert-title">Reset Successful</div>
+                        <div class="alert-message">All analytics data has been reset to zero</div>
+                    </div>
+                `;
+                alert.className = 'custom-alert success show';
+                
+                // Hide alert after 3 seconds
+                setTimeout(() => {
+                    alert.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        /* Make sidebar sticky */
+        .sidebar {
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--first-color) var(--container-color);
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: var(--container-color);
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+                background-color: var(--first-color);
+            border-radius: 3px;
+        }
+
+        /* Analytics Styles */
+        .analytics__grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .analytics__card {
+            background: var(--input-color);
+            padding: 1.5rem;
+            border-radius: .5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: .3s;
+        }
+
+        .analytics__card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .analytics__icon {
+            width: 48px;
+            height: 48px;
+            border-radius: .5rem;
+            background: var(--first-color-lighter);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+        }
+
+        .analytics__icon i {
+            font-size: 1.5rem;
+            color: var(--first-color);
+        }
+
+        .analytics__info h3 {
+            font-size: 0.9rem;
+            color: var(--text-color-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .analytics__number {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-color);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .analytics__growth {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .analytics__growth.positive {
+            color: #22c55e;
+        }
+
+        .analytics__growth.negative {
+            color: #ef4444;
+        }
+
+        .analytics__charts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .analytics__chart-card {
+            background: var(--input-color);
+            padding: 1.5rem;
+            border-radius: .5rem;
+        }
+
+        .analytics__chart-card h3 {
+            font-size: 1.1rem;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .analytics__chart {
+            width: 100%;
+            height: 300px;
+            position: relative;
+        }
+
+        .analytics__table {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        .analytics__table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .analytics__table th,
+        .analytics__table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .analytics__table th {
+            font-weight: 500;
+            color: var(--text-color-light);
+        }
+
+        .analytics__table td {
+            color: var(--text-color);
+        }
+
+        @media screen and (max-width: 768px) {
+            .analytics__charts {
+                grid-template-columns: 1fr;
+            }
+            
+            .analytics__chart-card {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="customAlert" class="custom-alert"></div>
+    <div class="dashboard">
+    <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="../assets/img/OH.png" alt="Logo">
+                <h2>Admin Panel</h2>
+        </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a onclick="showSection('analytics')" class="nav-link">
+                        <i class='bx bx-line-chart'></i> Analytics
+                </a>
+            </li>
+                <li class="nav-item">
+                    <a onclick="showSection('about-me')" class="nav-link">
+                        <i class='bx bx-user'></i> About Me
+                </a>
+            </li>
+                <li class="nav-item">
+                    <a onclick="showSection('work-services')" class="nav-link">
+                        <i class='bx bx-briefcase'></i> Work Services
+                </a>
+            </li>
+                <li class="nav-item">
+                    <a onclick="showSection('projects')" class="nav-link">
+                        <i class='bx bx-briefcase-alt'></i> Projects
+                </a>
+            </li>
+                <li class="nav-item">
+                    <a onclick="showSection('contact-section')" class="nav-link">
+                        <i class='bx bx-envelope'></i> Contact
+                </a>
+            </li>
+        </ul>
+        </aside>
+
+    <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+            <h1>Dashboard</h1>
+                <button class="logout-btn" onclick="handleLogout()">
+                <i class='bx bx-log-out'></i> Logout
+            </button>
+        </div>
+
+            <!-- Analytics Section -->
+            <section id="analytics" class="section">
+                <h2 class="section-title">
+                    <i class='bx bx-line-chart'></i> Website Analytics
+                    <button onclick="resetAnalytics()" class="save-btn" style="margin-left: auto; padding: 0.5rem 1rem;">
+                        <i class='bx bx-reset'></i> Reset Analytics
+                    </button>
+                </h2>
+                <div class="analytics__container">
+                    <div class="analytics__grid">
+                        <div class="analytics__card">
+                            <div class="analytics__icon">
+                                <i class='bx bx-show'></i>
+                        </div>
+                            <div class="analytics__info">
+                                <h3>Page Views</h3>
+                                <span class="analytics__number">0</span>
+                                <span class="analytics__growth">0%</span>
+                        </div>
+                    </div>
+                        
+                        <div class="analytics__card">
+                            <div class="analytics__icon">
+                                <i class='bx bx-user'></i>
+                </div>
+                            <div class="analytics__info">
+                                <h3>Unique Visitors</h3>
+                                <span class="analytics__number">856</span>
+                                <span class="analytics__growth positive">+8.2%</span>
+            </div>
+        </div>
+
+                        <div class="analytics__card">
+                            <div class="analytics__icon">
+                                <i class='bx bx-time-five'></i>
+                                </div>
+                            <div class="analytics__info">
+                                <h3>Avg. Time</h3>
+                                <span class="analytics__number">2m 45s</span>
+                                <span class="analytics__growth negative">-1.8%</span>
+                                </div>
+                        </div>
+                        
+                        <div class="analytics__card">
+                            <div class="analytics__icon">
+                                <i class='bx bx-download'></i>
+                        </div>
+                            <div class="analytics__info">
+                                <h3>CV Downloads</h3>
+                                <span class="analytics__number">42</span>
+                                <span class="analytics__growth positive">+15.3%</span>
+                        </div>
+                        </div>
+                        </div>
+                        
+                    <div class="analytics__charts">
+                        <div class="analytics__chart-card">
+                            <h3>Traffic Overview</h3>
+                            <div class="analytics__chart">
+                                <canvas id="trafficChart"></canvas>
+            </div>
+        </div>
+
+                        <div class="analytics__chart-card">
+                            <h3>Top Pages</h3>
+                            <div class="analytics__table">
+                                <table>
+                    <thead>
+                        <tr>
+                                            <th>Page</th>
+                                            <th>Views</th>
+                                            <th>Avg. Time</th>
+                        </tr>
+                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3">No data available</td>
+                        </tr>
+                    </tbody>
+                </table>
+                        </div>
+                        </div>
+                        </div>
+                        </div>
+            </section>
+
+            <!-- About Me Section -->
+            <section id="about-me" class="section">
+                <h2 class="section-title">
+                    <i class='bx bx-user'></i> About Me
+                </h2>
+                <form id="aboutMeForm" onsubmit="handleAboutMeSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Profile Image</label>
+                        <div class="image-upload" onclick="document.getElementById('profileImage').click()">
+                            <i class='bx bx-upload'></i>
+                            <p>Click to upload profile image</p>
+                            <input type="file" id="profileImage" accept="image/*" style="display: none">
+                        </div>
+                        <div class="image-preview" id="profilePreview"></div>
+                </div>
+                    <div class="form-group">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" id="name" required>
+            </div>
+                    <div class="form-group">
+                        <label class="form-label">Professional Title</label>
+                        <input type="text" class="form-control" id="title" required>
+        </div>
+                    <div class="form-group">
+                        <label class="form-label">About Description</label>
+                        <textarea class="form-control" id="aboutDescription" required rows="5"></textarea>
+            </div>
+                    <div class="form-group">
+                        <label class="form-label">Years of Experience</label>
+                        <input type="number" class="form-control" id="yearsExperience" required>
+        </div>
+                    <div class="form-group">
+                        <label class="form-label">Social Media Links</label>
+                        <div class="social-links">
+                            <input type="url" class="form-control" id="linkedinUrl" placeholder="LinkedIn URL">
+                            <input type="url" class="form-control" id="githubUrl" placeholder="GitHub URL">
+                        </div>
+                    </div>
+                    <button type="submit" class="save-btn">
+                        <i class='bx bx-save'></i> Save About Me
+                    </button>
+                </form>
+            </section>
+
+            <!-- Projects Section -->
+            <section id="projects" class="section">
+                <h2 class="section-title">
+                    <i class='bx bx-briefcase-alt'></i> Projects
+                </h2>
+                
+                <!-- Existing Projects List -->
+                <div class="existing-projects">
+                    <h3>Existing Projects</h3>
+                    <div id="projectsList" class="projects-grid"></div>
+                    </div>
+                    
+                <!-- Add/Edit Project Form -->
+                <form id="projectForm" onsubmit="handleProjectSubmit(event)">
+                    <input type="hidden" id="projectId">
+                    <div class="form-group">
+                        <label class="form-label">Project Title</label>
+                        <input type="text" class="form-control" id="projectTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Project Description</label>
+                        <textarea class="form-control" id="projectDescription" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Project Image</label>
+                        <div class="image-upload" onclick="document.getElementById('projectImage').click()">
+                            <i class='bx bx-image-add'></i>
+                            <p>Click to upload project image</p>
+                            <input type="file" id="projectImage" accept="image/*" style="display: none;">
+                    </div>
+                        <div id="projectImagePreview" class="image-preview"></div>
+                        </div>
+                    <div class="form-group">
+                        <label class="form-label">Project URL</label>
+                        <input type="url" class="form-control" id="projectUrl">
+                        </div>
+                    <button type="submit" class="save-btn">
+                        <i class='bx bx-save'></i> <span id="projectSubmitText">Add Project</span>
+                    </button>
+                    </form>
+            </section>
+
+            <!-- Contact Section -->
+            <div class="section" id="contact-section" style="display: none;">
+                <h2 class="section-title"><i class='bx bx-envelope'></i>Contact Information</h2>
+                <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" id="contactEmail" required>
+                </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone</label>
+                        <input type="tel" class="form-control" id="contactPhone">
+            </div>
+                    <div class="form-group">
+                        <label class="form-label">Location</label>
+                        <input type="text" class="form-control" id="contactLocation" required>
+        </div>
+                    <button type="submit" class="save-btn">
+                        <i class='bx bx-save'></i> Save Contact Information
+                    </button>
+                </form>
+                    </div>
+                    
+            <!-- Update Work Services section -->
+            <section id="work-services" class="section">
+                <h2 class="section-title">
+                    <i class='bx bx-briefcase'></i> Work Services
+                </h2>
+                
+                <!-- Existing Services List -->
+                <div class="existing-services">
+                    <h3>Existing Services</h3>
+                    <div id="servicesList" class="services-grid"></div>
+                    </div>
+                    
+                <!-- Add/Edit Service Form -->
+                <form id="serviceForm" onsubmit="handleServiceSubmit(event)">
+                    <input type="hidden" id="serviceId">
+                    <div class="form-group">
+                        <label class="form-label">Service Title</label>
+                        <input type="text" class="form-control" id="serviceTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Service Description</label>
+                        <textarea class="form-control" id="serviceDescription" required></textarea>
+            </div>
+                    <div class="form-group">
+                        <label class="form-label">Service Icon (Boxicons class)</label>
+                        <input type="text" class="form-control" id="serviceIcon" placeholder="e.g., bx-code-alt" required>
+        </div>
+                    <button type="submit" class="save-btn">
+                        <i class='bx bx-save'></i> <span id="serviceSubmitText">Add Service</span>
+                    </button>
+                    </form>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        // Check authentication
+        if (!localStorage.getItem('adminAuth')) {
+                window.location.href = 'login.html';
+        }
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.createElement('button');
+        mobileMenuBtn.className = 'mobile-menu-btn';
+        mobileMenuBtn.innerHTML = '<i class="bx bx-menu"></i>';
+        document.querySelector('.header').prepend(mobileMenuBtn);
+
+        const sidebar = document.querySelector('.sidebar');
+
+        // Toggle sidebar
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent click from bubbling to document
+            sidebar.classList.toggle('active');
+        });
+
+        // Close sidebar when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!sidebar.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                sidebar.classList.remove('active');
+            }
+        });
+
+        // Prevent clicks inside sidebar from closing it
+        sidebar.addEventListener('click', (e) => {
+            e.stopPropagation();
+        });
+
+        // Add event listener for profile image upload
+        document.getElementById('profileImage').addEventListener('change', handleImageUpload);
+
+        // Update handleImageUpload function
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('profilePreview');
+                    preview.innerHTML = `
+                        <img src="${e.target.result}" alt="Profile Preview" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%;">
+                        <button type="button" class="remove-btn" onclick="removeProfileImage()">×</button>
+                    `;
+                    
+                    // Save the image data to localStorage
+                    const aboutMeData = JSON.parse(localStorage.getItem('aboutMeData') || '{}');
+                    aboutMeData.profileImage = e.target.result;
+                    localStorage.setItem('aboutMeData', JSON.stringify(aboutMeData));
+                    
+                    // Update the image on the home page
+                    const homePageImage = document.querySelector('.about__img img');
+                    if (homePageImage) {
+                        homePageImage.src = e.target.result;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeProfileImage() {
+            const preview = document.getElementById('profilePreview');
+            preview.innerHTML = '';
+            document.getElementById('profileImage').value = '';
+            
+            // Reset to default image in localStorage
+            const aboutMeData = JSON.parse(localStorage.getItem('aboutMeData') || '{}');
+            aboutMeData.profileImage = '../assets/img/profile.jpg';
+            localStorage.setItem('aboutMeData', JSON.stringify(aboutMeData));
+            
+            // Update home page image
+            const homePageImage = document.querySelector('.about__img img');
+            if (homePageImage) {
+                homePageImage.src = '../assets/img/profile.jpg';
+            }
+        }
+
+        // Projects Section Functions
+        let projects = [
+            {
+                id: '1',
+                title: 'CALCULATOR PROJECT',
+                description: 'A modern calculator application built with HTML, CSS, and JavaScript.',
+                imageUrl: '../assets/img/work1.jpg',
+                url: 'https://github.com/Oussama-Hatim/Calculator-Project',
+                features: [
+                    'Basic arithmetic operations (add, subtract, multiply, divide)',
+                    'Keyboard input support',
+                    'Responsive design',
+                    'Clear and elegant UI'
+                ]
+            },
+            {
+                id: '2',
+                title: 'LOGIN PROJECT',
+                description: 'A secure and responsive login interface with modern design.',
+                imageUrl: '../assets/img/work2.jpg',
+                url: 'https://github.com/Oussama-Hatim/Login-Project',
+                features: [
+                    'Client-side form validation',
+                    'Password visibility toggle',
+                    'Responsive design for all devices',
+                    'Modern animations and transitions'
+                ]
+            }
+        ];
+
+        // Save initial projects if none exist
+        if (!localStorage.getItem('projects')) {
+            localStorage.setItem('projects', JSON.stringify(projects));
+        }
+
+        function loadProjects() {
+            const projectsList = document.getElementById('projectsList');
+            projectsList.innerHTML = '';
+            
+            projects.forEach((project, index) => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'project-card';
+                projectCard.innerHTML = `
+                    <div class="project-image-container">
+                        <img src="${project.imageUrl}" alt="${project.title}" 
+                            onerror="this.src='../assets/img/project-placeholder.jpg'"
+                            loading="lazy">
+                    </div>
+                    <div class="project-info">
+                        <h3>${project.title}</h3>
+                        <p>${project.description}</p>
+                        ${project.url ? `<a href="${project.url}" target="_blank" class="project-link">
+                            <i class='bx bx-link-external'></i> Repository Link
+                        </a>` : ''}
+                    </div>
+                    <div class="project-actions">
+                        <button onclick="editProject(${index})" class="edit-btn">
+                            <i class='bx bx-edit'></i> Edit
+                        </button>
+                        <button onclick="deleteProject(${index})" class="delete-btn">
+                            <i class='bx bx-trash'></i> Delete
+                        </button>
+                    </div>
+                `;
+                projectsList.appendChild(projectCard);
+            });
+        }
+
+        function syncProjectsWithHomePage() {
+            // Save to localStorage
+            localStorage.setItem('projects', JSON.stringify(projects));
+            
+            // Try to get the home page's work container
+            const workContainer = document.querySelector('.work__container');
+            if (workContainer) {
+                workContainer.innerHTML = projects.map(project => `
+                    <div class="work__img" onclick="document.getElementById('modal${project.id}').style.display='block'">
+                        <img src="${project.imageUrl}" alt="${project.title}">
+                        <div class="work__overlay">
+                            <h3 class="work__title">${project.title}</h3>
+                            <p class="work__description">${project.description}</p>
+                            <span class="work__overlay-text">Show More</span>
+                    </div>
+                    </div>
+                `).join('');
+            }
+
+            // Update or create project modals
+            projects.forEach(project => {
+                let modal = document.getElementById(`modal${project.id}`);
+                if (!modal) {
+                    modal = document.createElement('div');
+                    modal.id = `modal${project.id}`;
+                    modal.className = 'modal';
+                    document.body.appendChild(modal);
+                }
+
+                modal.innerHTML = `
+                    <div class="modal__content">
+                        <span class="modal__close" onclick="this.parentElement.parentElement.style.display='none'">&times;</span>
+                        <h2 class="modal__title">${project.title}</h2>
+                        <div class="modal__body">
+                            <div class="modal__image">
+                                <img src="${project.imageUrl}" alt="${project.title}">
+                    </div>
+                            <div class="modal__description">
+                                <p>${project.description}</p>
+                                <ul class="modal__features">
+                                    ${project.features.map(feature => `<li>${feature}</li>`).join('')}
+                                </ul>
+            </div>
+                            <div class="modal__actions">
+                                <a href="${project.url}" target="_blank" class="button">
+                                    <i class='bx bx-code-alt'></i> View Repository
+                                </a>
+        </div>
+    </div>
+                    </div>
+                `;
+            });
+
+            // Remove modals for deleted projects
+            const allModals = document.querySelectorAll('.modal');
+            allModals.forEach(modal => {
+                const modalId = modal.id;
+                if (modalId.startsWith('modal') && !projects.some(p => `modal${p.id}` === modalId)) {
+                    modal.remove();
+                }
+            });
+        }
+
+        function handleProjectSubmit(event) {
+            event.preventDefault();
+                const projectData = {
+                id: document.getElementById('projectId').value || Date.now().toString(),
+                title: document.getElementById('projectTitle').value.toUpperCase(),
+                    description: document.getElementById('projectDescription').value,
+                imageUrl: document.getElementById('projectImagePreview').querySelector('img')?.src || '',
+                url: document.getElementById('projectUrl').value,
+                features: [
+                    'Basic arithmetic operations (add, subtract, multiply, divide)',
+                    'Keyboard input support',
+                    'Responsive design',
+                    'Clear and elegant UI'
+                ]
+            };
+
+            if (editingProjectIndex > -1) {
+                projects[editingProjectIndex] = {
+                    ...projects[editingProjectIndex],
+                    ...projectData,
+                    imageUrl: projectData.imageUrl || projects[editingProjectIndex].imageUrl
+                };
+                editingProjectIndex = -1;
+            } else {
+                projects.push(projectData);
+            }
+
+            syncProjectsWithHomePage();
+            resetProjectForm();
+            loadProjects();
+            showAlert('Project saved successfully!');
+        }
+
+        function editProject(index) {
+            const project = projects[index];
+            editingProjectIndex = index;
+            
+            document.getElementById('projectId').value = project.id;
+            document.getElementById('projectTitle').value = project.title;
+            document.getElementById('projectDescription').value = project.description;
+            document.getElementById('projectUrl').value = project.url || '';
+            
+            if (project.imageUrl) {
+                document.getElementById('projectImagePreview').innerHTML = `
+                    <img src="${project.imageUrl}" alt="${project.title}" 
+                        onerror="this.src='../assets/img/project-placeholder.jpg'">
+                `;
+            }
+            
+            document.getElementById('projectSubmitText').textContent = 'Update Project';
+            document.getElementById('projectForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function deleteProject(index) {
+            if (confirm('Are you sure you want to delete this project? This will remove it from the home page as well.')) {
+                projects.splice(index, 1);
+                syncProjectsWithHomePage();
+                loadProjects();
+                showAlert('Project deleted successfully!');
+            }
+        }
+
+        function resetProjectForm() {
+            document.getElementById('projectForm').reset();
+            document.getElementById('projectId').value = '';
+            document.getElementById('projectImagePreview').innerHTML = '';
+            document.getElementById('projectSubmitText').textContent = 'Add Project';
+            editingProjectIndex = -1;
+        }
+
+        // Navigation Functions
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section, [id$="-section"]').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            const selectedSection = document.getElementById(sectionId);
+            if (selectedSection) {
+                selectedSection.style.display = 'block';
+            }
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick').includes(sectionId)) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Initialize sections visibility
+        document.addEventListener('DOMContentLoaded', function() {
+            // Show about-me section by default
+            showSection('about-me');
+            
+            // Set the sidebar logo
+            const sidebarLogo = document.querySelector('.sidebar-header img');
+            if (sidebarLogo) {
+                sidebarLogo.src = '../assets/img/OH.png';
+            }
+            
+            // Load saved projects or use defaults
+            const savedProjects = localStorage.getItem('projects');
+            if (savedProjects) {
+                projects = JSON.parse(savedProjects);
+            }
+            
+            // Load projects in dashboard
+            loadProjects();
+            
+            // Load services data
+            const savedServices = localStorage.getItem('services');
+            if (savedServices) {
+                services = JSON.parse(savedServices);
+            }
+            
+            // Load services in dashboard
+            loadServices();
+            
+            // Load other data
+            loadSavedData();
+            loadContactData();
+        });
+
+        // Make nav links clickable
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.style.cursor = 'pointer';
+        });
+
+        // Contact Section Functions
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const contactData = {
+                email: document.getElementById('contactEmail').value,
+                phone: document.getElementById('contactPhone').value,
+                location: document.getElementById('contactLocation').value
+            };
+            
+            localStorage.setItem('contactData', JSON.stringify(contactData));
+            showAlert('Contact information updated successfully!');
+        }
+
+        function loadContactData() {
+            const savedContact = localStorage.getItem('contactData');
+            if (savedContact) {
+                const contactData = JSON.parse(savedContact);
+                document.getElementById('contactEmail').value = contactData.email || '';
+                document.getElementById('contactPhone').value = contactData.phone || '';
+                document.getElementById('contactLocation').value = contactData.location || '';
+            }
+        }
+
+        // Work Services Section Functions
+        let services = [
+            {
+                id: '1',
+                title: 'Web Development',
+                description: 'Creating responsive and dynamic websites using modern technologies.',
+                icon: 'bx-code-alt'
+            },
+            {
+                id: '2',
+                title: 'Mobile Development',
+                description: 'Building cross-platform mobile applications for iOS and Android.',
+                icon: 'bx-mobile-alt'
+            },
+            {
+                id: '3',
+                title: 'UI/UX Design',
+                description: 'Designing intuitive and beautiful user interfaces and experiences.',
+                icon: 'bx-palette'
+            }
+        ];
+
+        let editingServiceIndex = -1;
+
+        function handleServiceSubmit(event) {
+            event.preventDefault();
+                const serviceData = {
+                id: document.getElementById('serviceId').value || Date.now().toString(),
+                    title: document.getElementById('serviceTitle').value,
+                    description: document.getElementById('serviceDescription').value,
+                icon: document.getElementById('serviceIcon').value
+            };
+
+            if (editingServiceIndex > -1) {
+                // Update existing service
+                services[editingServiceIndex] = {
+                    ...services[editingServiceIndex],
+                    ...serviceData
+                };
+                editingServiceIndex = -1;
+            } else {
+                // Add new service
+                services.push(serviceData);
+            }
+
+            // Save to localStorage
+            localStorage.setItem('services', JSON.stringify(services));
+            
+            // Update home page services section
+            const servicesContainer = document.querySelector('.services__container');
+            if (servicesContainer) {
+                servicesContainer.innerHTML = services.map(service => `
+                    <div class="services__content">
+                        <div>
+                            <i class='bx ${service.icon} services__icon'></i>
+                            <h3 class="services__title">${service.title}</h3>
+                        </div>
+                        <p class="services__description">${service.description}</p>
+                    </div>
+                `).join('');
+            }
+            
+            // Update dashboard display
+            resetServiceForm();
+            loadServices();
+            alert('Service saved successfully! The changes have been applied to the home page.');
+        }
+
+        function loadServices() {
+            const servicesList = document.getElementById('servicesList');
+            if (!servicesList) return;
+            
+            servicesList.innerHTML = services.map((service, index) => `
+                <div class="service-card">
+                    <div class="service-info">
+                        <i class='bx ${service.icon} service-icon'></i>
+                        <h3>${service.title}</h3>
+                        <p>${service.description}</p>
+                    </div>
+                    <div class="service-actions">
+                        <button onclick="editService(${index})" class="edit-btn">
+                            <i class='bx bx-edit'></i> Edit
+                        </button>
+                        <button onclick="deleteService(${index})" class="delete-btn">
+                            <i class='bx bx-trash'></i> Delete
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function editService(index) {
+            const service = services[index];
+            editingServiceIndex = index;
+            
+            document.getElementById('serviceId').value = service.id;
+            document.getElementById('serviceTitle').value = service.title;
+            document.getElementById('serviceDescription').value = service.description;
+            document.getElementById('serviceIcon').value = service.icon;
+            
+            document.getElementById('serviceSubmitText').textContent = 'Update Service';
+            document.getElementById('serviceForm').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function deleteService(index) {
+            if (confirm('Are you sure you want to delete this service? This will remove it from the home page as well.')) {
+                services.splice(index, 1);
+                localStorage.setItem('services', JSON.stringify(services));
+                loadServices();
+            }
+        }
+
+        function resetServiceForm() {
+            document.getElementById('serviceForm').reset();
+            document.getElementById('serviceId').value = '';
+            document.getElementById('serviceSubmitText').textContent = 'Add Service';
+            editingServiceIndex = -1;
+        }
+
+        // Logout function
+        function handleLogout() {
+            localStorage.removeItem('adminAuth');
+            window.location.href = 'login.html';
+        }
+
+        // Initialize analytics charts when the section is shown
+        function initializeAnalytics() {
+            updateAnalyticsCards();
+            updateTrafficChart();
+            updateTopPages();
+            
+            // Start auto-refresh
+            if (analyticsRefreshInterval) {
+                clearInterval(analyticsRefreshInterval);
+            }
+            analyticsRefreshInterval = setInterval(() => {
+                if (document.getElementById('analytics').style.display !== 'none') {
+                    updateAnalyticsCards();
+                    updateTrafficChart();
+                    updateTopPages();
+                }
+            }, 5000);
+        }
+
+        let analyticsRefreshInterval;
+
+        function updateAnalyticsCards() {
+            const analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+            const today = new Date().toISOString().split('T')[0];
+
+            // Update page views
+            const totalPageViews = calculateTotal(analytics.pageViews);
+            const pageViewsGrowth = calculateGrowth(analytics.pageViews);
+            updateAnalyticsCard('pageViews', totalPageViews, pageViewsGrowth);
+
+            // Update unique visitors
+            const totalVisitors = calculateTotal(analytics.uniqueVisitors);
+            const visitorsGrowth = calculateGrowth(analytics.uniqueVisitors);
+            updateAnalyticsCard('uniqueVisitors', totalVisitors, visitorsGrowth);
+
+            // Update average time
+            const timeSpent = analytics.timeSpent?.[today];
+            const avgTime = timeSpent ? Math.round(timeSpent.totalSeconds / timeSpent.visits) : 0;
+            const timeGrowth = calculateTimeGrowth(analytics.timeSpent);
+            updateAnalyticsCard('avgTime', formatTime(avgTime), timeGrowth);
+
+            // Update CV downloads
+            const totalDownloads = calculateTotal(analytics.cvDownloads);
+            const downloadsGrowth = calculateGrowth(analytics.cvDownloads);
+            updateAnalyticsCard('cvDownloads', totalDownloads, downloadsGrowth);
+        }
+
+        function updateAnalyticsCard(metric, value, growth) {
+            const cards = {
+                pageViews: document.querySelector('.analytics__card:nth-child(1)'),
+                uniqueVisitors: document.querySelector('.analytics__card:nth-child(2)'),
+                avgTime: document.querySelector('.analytics__card:nth-child(3)'),
+                cvDownloads: document.querySelector('.analytics__card:nth-child(4)')
+            };
+
+            const card = cards[metric];
+            if (card) {
+                const numberEl = card.querySelector('.analytics__number');
+                const growthEl = card.querySelector('.analytics__growth');
+                
+                numberEl.textContent = value;
+                growthEl.textContent = formatGrowth(growth);
+                growthEl.className = `analytics__growth ${growth >= 0 ? 'positive' : 'negative'}`;
+            }
+        }
+
+        function updateTrafficChart() {
+            const ctx = document.getElementById('trafficChart').getContext('2d');
+            const analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+            
+            // Get last 6 months of data
+            const labels = [];
+            const data = [];
+            const today = new Date();
+            
+            for (let i = 5; i >= 0; i--) {
+                const date = new Date(today.getFullYear(), today.getMonth() - i, 1);
+                const monthKey = date.toISOString().split('T')[0].slice(0, 7);
+                labels.push(monthKey);
+                
+                // Sum up all page views for this month
+                let monthTotal = 0;
+                if (analytics.pageViews) {
+                    Object.entries(analytics.pageViews).forEach(([day, views]) => {
+                        if (day.startsWith(monthKey)) {
+                            monthTotal += Object.values(views).reduce((a, b) => a + b, 0);
+                        }
+                    });
+                }
+                data.push(monthTotal);
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Page Views',
+                        data: data,
+                        borderColor: 'rgb(255, 0, 0)',
+                        tension: 0.4,
+                        fill: false
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#f4f4f4'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#f4f4f4'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function updateTopPages() {
+            const analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+            const today = new Date().toISOString().split('T')[0];
+            const pageViews = analytics.pageViews?.[today] || {};
+            const timeSpent = analytics.timeSpent?.[today] || { totalSeconds: 0, visits: 0 };
+            
+            // Sort pages by views
+            const sortedPages = Object.entries(pageViews)
+                .sort(([,a], [,b]) => b - a)
+                .slice(0, 3);
+            
+            // Update table
+            const tbody = document.querySelector('.analytics__table tbody');
+            if (!sortedPages || sortedPages.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3">No data available</td></tr>';
+            } else {
+                tbody.innerHTML = sortedPages.map(([page, views]) => `
+                    <tr>
+                        <td>${formatPageName(page)}</td>
+                        <td>${views || 0}</td>
+                        <td>${timeSpent.visits > 0 ? formatTime(Math.round(timeSpent.totalSeconds / timeSpent.visits)) : '0m 0s'}</td>
+                    </tr>
+                `).join('');
+            }
+        }
+
+        // Helper functions
+        function calculateTotal(metricData) {
+            if (!metricData) return 0;
+            return Object.values(metricData).reduce((sum, dayData) => {
+                if (typeof dayData === 'number') return sum + dayData;
+                if (typeof dayData === 'object') return sum + Object.values(dayData).reduce((a, b) => a + b, 0);
+                return sum;
+            }, 0);
+        }
+
+        function calculateGrowth(metricData) {
+            if (!metricData) return 0;
+            const dates = Object.keys(metricData).sort();
+            if (dates.length < 2) return 0;
+            
+            const today = dates[dates.length - 1];
+            const yesterday = dates[dates.length - 2];
+            
+            const todayValue = typeof metricData[today] === 'number' ? 
+                metricData[today] : 
+                Object.values(metricData[today] || {}).reduce((a, b) => a + b, 0);
+            
+            const yesterdayValue = typeof metricData[yesterday] === 'number' ? 
+                metricData[yesterday] : 
+                Object.values(metricData[yesterday] || {}).reduce((a, b) => a + b, 0);
+            
+            if (yesterdayValue === 0) return 100;
+            return ((todayValue - yesterdayValue) / yesterdayValue) * 100;
+        }
+
+        function calculateTimeGrowth(timeData) {
+            if (!timeData) return 0;
+            const dates = Object.keys(timeData).sort();
+            if (dates.length < 2) return 0;
+            
+            const today = dates[dates.length - 1];
+            const yesterday = dates[dates.length - 2];
+            
+            const todayAvg = timeData[today].totalSeconds / timeData[today].visits;
+            const yesterdayAvg = timeData[yesterday].totalSeconds / timeData[yesterday].visits;
+            
+            if (yesterdayAvg === 0) return 100;
+            return ((todayAvg - yesterdayAvg) / yesterdayAvg) * 100;
+        }
+
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
+            const remainingSeconds = seconds % 60;
+            return `${minutes}m ${remainingSeconds}s`;
+        }
+
+        function formatGrowth(value) {
+            return (value >= 0 ? '+' : '') + value.toFixed(1) + '%';
+        }
+
+        function formatPageName(page) {
+            return page.charAt(0).toUpperCase() + page.slice(1).replace(/-/g, ' ');
+        }
+
+        function getAverageTimeForPage(page) {
+            const analytics = JSON.parse(localStorage.getItem('siteAnalytics') || '{}');
+            const today = new Date().toISOString().split('T')[0];
+            const timeSpent = analytics.timeSpent?.[today];
+            
+            if (!timeSpent || !timeSpent.visits || timeSpent.visits === 0) return '0m 0s';
+            return formatTime(Math.round(timeSpent.totalSeconds / timeSpent.visits));
+        }
+
+        // Add loadSavedData function
+        function loadSavedData() {
+            // Try to load saved data first
+            const savedData = localStorage.getItem('aboutMeData');
+            let aboutMeData;
+            
+            if (savedData) {
+                aboutMeData = JSON.parse(savedData);
+            } else {
+                // Use default data if no saved data exists
+                aboutMeData = {
+                    name: "Oussama Hatim",
+                    title: "Full Stack Developer",
+                    description: "I am a passionate Full Stack Developer with expertise in web development. I create responsive websites and web applications using modern technologies.",
+                    yearsExperience: "2",
+                    profileImage: "../assets/img/profile.jpg",
+                    social: {
+                        linkedin: "https://www.linkedin.com/in/oussama-hatim/",
+                        github: "https://github.com/Oussama-Hatim"
+                    }
+                };
+                // Save default data
+                localStorage.setItem('aboutMeData', JSON.stringify(aboutMeData));
+            }
+
+            // Set values in the form
+            document.getElementById('name').value = aboutMeData.name;
+            document.getElementById('title').value = aboutMeData.title;
+            document.getElementById('aboutDescription').value = aboutMeData.description;
+            document.getElementById('yearsExperience').value = aboutMeData.yearsExperience;
+            
+            // Set social media links
+            document.getElementById('linkedinUrl').value = aboutMeData.social.linkedin;
+            document.getElementById('githubUrl').value = aboutMeData.social.github;
+            
+            // Set profile image preview with the circular style
+            const profilePreview = document.getElementById('profilePreview');
+            profilePreview.innerHTML = `
+                <div class="preview-item">
+                    <img src="${aboutMeData.profileImage}" alt="Profile Image">
+                    <button type="button" class="remove-btn" onclick="removeProfileImage()">×</button>
+                </div>
+            `;
+        }
+
+        // Call loadSavedData when the page loads
+        document.addEventListener('DOMContentLoaded', loadSavedData);
+
+        async function handleAboutMeSubmit(event) {
+            event.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                title: document.getElementById('title').value,
+                description: document.getElementById('aboutDescription').value,
+                yearsExperience: document.getElementById('yearsExperience').value,
+                social: {
+                    linkedin: document.getElementById('linkedinUrl').value,
+                    github: document.getElementById('githubUrl').value
+                }
+            };
+
+            // Get the current profile image
+            const profilePreview = document.getElementById('profilePreview');
+            const previewImage = profilePreview.querySelector('img');
+            formData.profileImage = previewImage ? previewImage.src : '../assets/img/profile.jpg';
+
+            // Save to localStorage
+            localStorage.setItem('aboutMeData', JSON.stringify(formData));
+
+            // Update home page elements
+            const aboutSection = document.querySelector('.about');
+            if (aboutSection) {
+                // Update profile image
+                const profileImage = aboutSection.querySelector('.about__img img');
+                if (profileImage && formData.profileImage) {
+                    profileImage.src = formData.profileImage;
+                }
+                
+                // Update other elements
+                const nameElement = aboutSection.querySelector('.about__subtitle');
+                if (nameElement) {
+                    nameElement.textContent = `I am ${formData.name}`;
+                }
+                
+                const descriptionElement = aboutSection.querySelector('.about__text');
+                if (descriptionElement) {
+                    descriptionElement.textContent = formData.description;
+                }
+            }
+
+            // Show success message
+            showAlert('About Me section updated successfully!', 'success');
+        }
+    </script>
+</body>
+</html> 
