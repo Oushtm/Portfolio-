@@ -1,4 +1,5 @@
 const Contact = require('../models/Contact.model');
+const { sendContactEmail } = require('../utils/email');
 
 const MAX_LIMIT = 100;
 
@@ -14,6 +15,9 @@ const submitContact = async (req, res, next) => {
       ipAddress: req.ip,
       userAgent: req.headers['user-agent'],
     });
+
+    // Send email notification (failsafe)
+    await sendContactEmail({ name, email, subject, message });
 
     return res.status(201).json({
       success: true,

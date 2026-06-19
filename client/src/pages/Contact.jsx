@@ -17,7 +17,7 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || "";
 const INITIAL_FORM = { name: "", email: "", subject: "", message: "" };
 const PENDING_DURATION = 30;
 
@@ -46,10 +46,6 @@ const Contact = () => {
   };
 
   const sendToAPI = async (data) => {
-    if (!API_URL) {
-      setSubmitStatus("error");
-      return;
-    }
     setIsSubmitting(true);
     try {
       const response = await fetch(`${API_URL}/api/v1/contact`, {
