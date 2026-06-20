@@ -1,7 +1,7 @@
 import { CONTACT_INFO } from "@/config/contact";
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Link } from "react-router-dom";
-import logoImg from "@/assets/profile/logo.png";
+import logoSvg from "@/assets/profile/logo.svg";
 
 const pageLinks = [
   { name: "Home", path: "/" },
@@ -19,15 +19,12 @@ const Footer = () => {
       <div className="footer-inner">
         <div className="footer-grid">
           <div className="footer-brand-col">
-            <Link to="/" className="navbar-brand flex items-center gap-2">
+            <Link to="/" className="navbar-brand">
               <img
-                src={logoImg}
-                alt="Oussama Hatim Logo"
-                className="w-7 h-7 rounded-full object-cover border border-cyan-400/20"
+                src={logoSvg}
+                alt="Oushtm Logo"
+                className="footer-brand-logo"
               />
-              <span className="navbar-brand-text">
-                oussama<span className="text-cyan-400">.dev</span>
-              </span>
             </Link>
             <p className="footer-tagline">
               Software engineer building products that feel handcrafted.
@@ -93,7 +90,7 @@ const Footer = () => {
         </div>
 
         <div className="footer-bottom">
-          <p>© {currentYear} Oussama. Engineered with intent.</p>
+          <p>© {currentYear} Oushtm. Engineered with intent.</p>
           <span className="font-mono text-xs text-gray-600">
             v2.6.0 · build {currentYear}
           </span>

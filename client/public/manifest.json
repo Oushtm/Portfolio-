@@ -1,6 +1,6 @@
 {
-  "name": "Oussama Hatim - Full Stack Developer Portfolio",
-  "short_name": "Oussama Hatim",
+  "name": "Oushtm — Full Stack Developer Portfolio",
+  "short_name": "Oushtm",
   "description": "Portfolio of Oussama Hatim - Full Stack Developer & Software Engineering Student specializing in React.js, Node.js, Next.js, TypeScript, and modern web technologies.",
   "start_url": "/",
   "scope": "/",
@@ -19,6 +19,12 @@
   ],
   "screenshots": [],
   "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
     {
       "src": "/favicon-192.png",
       "sizes": "192x192",

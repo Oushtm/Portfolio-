@@ -3,7 +3,7 @@ import { Menu, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import SearchDialog from "./SearchDialog";
-import logoImg from "@/assets/profile/logo.png";
+import logoSvg from "@/assets/profile/logo.svg";
 
 const navLinks = [
   { path: "/", label: "Home" },
@@ -42,15 +42,12 @@ const Navbar = () => {
       transition={{ duration: 0.5 }}
     >
       <div className="navbar-inner">
-        <Link to="/" className="navbar-brand flex items-center gap-2">
+        <Link to="/" className="navbar-brand">
           <img
-            src={logoImg}
-            alt="Oussama Hatim Logo"
-            className="w-7 h-7 rounded-full object-cover border border-cyan-400/20"
+            src={logoSvg}
+            alt="Oushtm Logo"
+            className="navbar-logo"
           />
-          <span className="navbar-brand-text">
-            oussama<span className="text-cyan-400">.dev</span>
-          </span>
         </Link>
 
         <div className="hidden lg:flex flex-1 justify-center">

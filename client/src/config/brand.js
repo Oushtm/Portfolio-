@@ -1,6 +1,6 @@
 export const BRAND = {
-  name: "Oussama",
-  fullName: "Oussama",
+  name: "Oushtm",
+  fullName: "Oussama Hatim",
   title: "Full-Stack Developer & Software Engineering Student",
   tagline: "Building digital products with creativity, engineering, and a passion for continuous learning.",
   bio: "Full-stack developer crafting performant web products with React, Node.js, and modern cloud tooling.",

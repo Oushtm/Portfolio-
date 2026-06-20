@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import HireEasterEgg from "./HireEasterEgg";
 
 const BOOT_LINES = [
-  { text: "Initializing Oussama OS v2.6...", delay: 0 },
+  { text: "Initializing Oushtm OS v2.6...", delay: 0 },
   { text: "Loading kernel modules... OK", delay: 400 },
   { text: "Mounting /dev/skills ... OK", delay: 800 },
   { text: "Type a command or press Tab for hints.", delay: 1200 },
@@ -230,7 +230,7 @@ const CommandCenter = () => {
             <span className="dot dot-green" />
           </div>
           <span className="font-mono text-xs text-cyan-400/70 tracking-widest">
-            oussama@dev ~ command-center
+            oushtm ~ command-center
           </span>
           <span className="font-mono text-[10px] text-emerald-400/60 ml-auto hidden sm:block">
             ● LIVE
