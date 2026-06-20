@@ -41,6 +41,7 @@ function AnimatedOutlet() {
     <AnimatePresence mode="wait">
       <motion.div
         key={location.pathname}
+        className="min-w-0 w-full overflow-x-clip"
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -6 }}
@@ -57,14 +58,14 @@ function AppLayout() {
   useVisitorTracking();
 
   return (
-    <div className="min-h-screen flex flex-col relative">
+    <div className="min-h-screen flex flex-col relative overflow-x-clip max-w-[100vw]">
       <DynamicGrid />
       <ErrorBoundary fallback={null}>
         <FloatingParticles count={20} />
       </ErrorBoundary>
       <ScrollToTop />
       <Navbar />
-      <main className="flex-grow relative z-10">
+      <main className="flex-grow relative z-10 min-w-0 w-full overflow-x-clip">
         <ErrorBoundary>
           <Suspense fallback={<Loading />}>
             <Routes>

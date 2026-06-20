@@ -14,13 +14,35 @@
   --border: rgba(34, 211, 238, 0.12);
 }
 
-* {
-  font-family: 'Inter', sans-serif;
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
   @apply bg-[#030308] text-gray-100;
-  overflow-x: hidden;
+  overflow-x: clip;
+  min-width: 0;
+  max-width: 100vw;
+}
+
+#root {
+  min-width: 0;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+img, video {
+  max-width: 100%;
 }
 
 .font-mono, code, .command-center, .terminal-line {
@@ -75,7 +97,7 @@ body {
 }
 
 .navbar-inner {
-  @apply relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex h-16 items-center;
+  @apply relative mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 flex h-16 items-center gap-2 min-w-0;
   background: rgba(3, 3, 8, 0.8);
   backdrop-filter: blur(20px);
 }
@@ -117,7 +139,7 @@ body {
 }
 
 .nav-link {
-  @apply relative px-3 py-2 text-sm text-gray-400 hover:text-cyan-300 transition-all rounded-lg font-mono;
+  @apply relative px-2 lg:px-3 py-2 text-xs lg:text-sm text-gray-400 hover:text-cyan-300 transition-all rounded-lg font-mono whitespace-nowrap;
 }
 
 .nav-link--active {
@@ -144,7 +166,7 @@ body {
 }
 
 .btn-primary {
-  @apply px-5 py-2.5 rounded-lg font-medium text-sm;
+  @apply px-4 sm:px-5 py-2.5 rounded-lg font-medium text-sm;
   background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(167, 139, 250, 0.2));
   border: 1px solid rgba(34, 211, 238, 0.3);
   color: #e0f2fe;
@@ -156,7 +178,7 @@ body {
 }
 
 .btn-secondary {
-  @apply px-5 py-2.5 rounded-lg font-medium text-sm text-gray-300;
+  @apply px-4 sm:px-5 py-2.5 rounded-lg font-medium text-sm text-gray-300;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
 }
@@ -167,11 +189,16 @@ body {
 
 /* ── Home ── */
 .home-page {
-  @apply pt-24 pb-16 px-4 max-w-7xl mx-auto;
+  @apply pt-20 sm:pt-24 pb-12 sm:pb-16 px-3 sm:px-4 max-w-7xl mx-auto w-full min-w-0;
 }
 
 .hero-command-section {
-  @apply grid lg:grid-cols-2 gap-10 lg:gap-14 items-start min-h-[70vh];
+  @apply grid lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-14 items-start min-h-0 lg:min-h-[70vh] w-full min-w-0;
+}
+
+.hero-text-col,
+.hero-terminal-col {
+  @apply min-w-0 w-full;
 }
 
 .hero-badge {
@@ -181,7 +208,7 @@ body {
 }
 
 .hero-title {
-  @apply text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-5;
+  @apply text-[1.75rem] sm:text-4xl lg:text-6xl font-bold leading-[1.15] sm:leading-[1.1] tracking-tight mb-4 sm:mb-5;
 }
 
 .hero-title-accent {
@@ -200,7 +227,7 @@ body {
 }
 
 .hero-desc {
-  @apply text-gray-400 text-lg max-w-md mb-8 leading-relaxed;
+  @apply text-gray-400 text-base sm:text-lg max-w-md mb-6 sm:mb-8 leading-relaxed;
 }
 
 .hero-actions {
@@ -208,34 +235,38 @@ body {
 }
 
 .home-section {
-  @apply mt-20;
+  @apply mt-12 sm:mt-20;
 }
 
 .section-title {
-  @apply text-xl font-bold font-mono mb-8 tracking-tight;
+  @apply text-lg sm:text-xl font-bold font-mono mb-6 sm:mb-8 tracking-tight;
 }
 
 .home-cta {
-  @apply mt-20;
+  @apply mt-12 sm:mt-20;
 }
 
 .cta-panel {
-  @apply p-8 sm:p-12 rounded-2xl text-center;
+  @apply p-6 sm:p-8 lg:p-12 rounded-2xl text-center;
   background: linear-gradient(135deg, rgba(34, 211, 238, 0.06), rgba(167, 139, 250, 0.06));
   border: 1px solid rgba(34, 211, 238, 0.15);
 }
 
 /* ── Command Center ── */
 .command-center {
-  @apply rounded-xl overflow-hidden;
+  @apply rounded-xl overflow-hidden w-full min-w-0;
   background: rgba(6, 10, 20, 0.9);
   border: 1px solid rgba(34, 211, 238, 0.2);
   box-shadow: 0 0 40px rgba(34, 211, 238, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .command-center-header {
-  @apply flex items-center gap-3 px-4 py-3 border-b border-white/5;
+  @apply flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-2.5 sm:py-3 border-b border-white/5 min-w-0;
   background: rgba(0, 0, 0, 0.3);
+}
+
+.command-center-header-title {
+  @apply font-mono text-[10px] sm:text-xs text-cyan-400/70 tracking-wide sm:tracking-widest truncate;
 }
 
 .terminal-dots {
@@ -251,11 +282,12 @@ body {
 .dot-green { background: #28c840; }
 
 .command-center-body {
-  @apply p-4 h-64 sm:h-72 overflow-y-auto text-sm space-y-1;
+  @apply p-3 sm:p-4 h-56 sm:h-64 md:h-72 overflow-y-auto overflow-x-hidden text-xs sm:text-sm space-y-1;
 }
 
 .terminal-line {
-  @apply leading-relaxed;
+  @apply leading-relaxed break-words;
+  overflow-wrap: anywhere;
 }
 
 .terminal-line--system { @apply text-gray-500; }
@@ -264,12 +296,12 @@ body {
 .terminal-line--hint { @apply text-violet-400/70 text-xs; }
 
 .command-center-input-row {
-  @apply flex items-center gap-2 px-4 py-3 border-t border-white/5;
+  @apply flex items-center gap-2 px-3 sm:px-4 py-2.5 sm:py-3 border-t border-white/5 min-w-0;
   background: rgba(0, 0, 0, 0.2);
 }
 
 .command-input {
-  @apply flex-1 bg-transparent outline-none text-gray-200 font-mono text-sm placeholder:text-gray-600;
+  @apply flex-1 min-w-0 bg-transparent outline-none text-gray-200 font-mono text-xs sm:text-sm placeholder:text-gray-600;
 }
 
 .cursor-blink {
@@ -304,11 +336,11 @@ body {
 
 /* ── Stats ── */
 .stats-grid {
-  @apply grid grid-cols-2 lg:grid-cols-4 gap-4;
+  @apply grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4;
 }
 
 .stat-card {
-  @apply p-5 rounded-xl relative overflow-hidden;
+  @apply p-4 sm:p-5 rounded-xl relative overflow-hidden min-w-0;
   background: var(--surface);
   border: 1px solid var(--border);
   backdrop-filter: blur(12px);
@@ -332,7 +364,7 @@ body {
 }
 
 .stat-value {
-  @apply block text-3xl font-bold font-mono;
+  @apply block text-2xl sm:text-3xl font-bold font-mono;
   color: var(--accent);
 }
 
@@ -351,13 +383,13 @@ body {
 
 /* ── GitHub Live ── */
 .github-live {
-  @apply p-6 rounded-2xl;
+  @apply p-4 sm:p-6 rounded-2xl min-w-0;
   background: var(--surface);
   border: 1px solid var(--border);
 }
 
 .github-live-header {
-  @apply flex items-center justify-between mb-6;
+  @apply flex flex-wrap items-center justify-between gap-2 sm:gap-3 mb-4 sm:mb-6;
 }
 
 .live-badge {
@@ -382,7 +414,7 @@ body {
 }
 
 .github-stat-value {
-  @apply block text-xl font-bold font-mono text-cyan-400;
+  @apply block text-lg sm:text-xl font-bold font-mono text-cyan-400;
 }
 
 .github-stat-label {
@@ -411,7 +443,7 @@ body {
 }
 
 .github-repo-card {
-  @apply p-4 rounded-lg block transition-all;
+  @apply p-4 rounded-lg block transition-all min-w-0;
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
@@ -422,7 +454,7 @@ body {
 }
 
 .repo-name {
-  @apply font-mono text-sm text-cyan-300 font-medium;
+  @apply font-mono text-sm text-cyan-300 font-medium truncate min-w-0;
 }
 
 .repo-desc {
@@ -430,7 +462,7 @@ body {
 }
 
 .repo-meta {
-  @apply flex items-center gap-3 mt-3 text-[10px] text-gray-500;
+  @apply flex flex-wrap items-center gap-2 sm:gap-3 mt-3 text-[10px] text-gray-500;
 }
 
 .repo-lang {
@@ -447,28 +479,28 @@ body {
 
 /* ── Pages ── */
 .page-container {
-  @apply pt-24 pb-20 px-4 max-w-6xl mx-auto;
+  @apply pt-20 sm:pt-24 pb-16 sm:pb-20 px-3 sm:px-4 max-w-6xl mx-auto w-full min-w-0;
 }
 
 .page-header {
-  @apply mb-12;
+  @apply mb-8 sm:mb-12;
 }
 
 .page-title {
-  @apply text-4xl sm:text-5xl font-bold font-mono tracking-tight mb-3;
+  @apply text-3xl sm:text-4xl lg:text-5xl font-bold font-mono tracking-tight mb-2 sm:mb-3;
 }
 
 .page-subtitle {
-  @apply text-gray-400 max-w-xl;
+  @apply text-gray-400 max-w-xl text-sm sm:text-base;
 }
 
 /* ── Projects ── */
 .filter-bar {
-  @apply flex flex-wrap items-center gap-2 mb-10;
+  @apply flex flex-wrap items-center gap-2 mb-8 sm:mb-10;
 }
 
 .filter-pill {
-  @apply px-4 py-1.5 rounded-full text-sm font-mono text-gray-400 transition-all;
+  @apply px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-mono text-gray-400 transition-all;
   border: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(255, 255, 255, 0.02);
 }
@@ -484,11 +516,11 @@ body {
 }
 
 .projects-grid {
-  @apply grid md:grid-cols-2 gap-6;
+  @apply grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6;
 }
 
 .project-float-card {
-  @apply rounded-xl overflow-hidden relative;
+  @apply rounded-xl overflow-hidden relative min-w-0 w-full;
   background: var(--surface);
   border: 1px solid rgba(167, 139, 250, 0.12);
   backdrop-filter: blur(12px);
@@ -525,11 +557,11 @@ body {
 }
 
 .project-card-body {
-  @apply p-5;
+  @apply p-4 sm:p-5 min-w-0;
 }
 
 .project-card-top {
-  @apply flex items-center justify-between mb-3;
+  @apply flex flex-wrap items-center justify-between gap-2 mb-3;
 }
 
 .project-category {
@@ -538,7 +570,7 @@ body {
 }
 
 .project-timeline {
-  @apply flex items-center gap-1.5;
+  @apply flex flex-wrap items-center gap-1.5;
 }
 
 .timeline-dot {
@@ -569,7 +601,7 @@ body {
 }
 
 .project-card-links {
-  @apply flex gap-4;
+  @apply flex flex-wrap gap-3 sm:gap-4;
 }
 
 .project-link {
@@ -587,7 +619,7 @@ body {
 
 /* ── Tech Radar ── */
 .tech-radar-wrapper {
-  @apply relative p-6 rounded-2xl mb-8;
+  @apply relative p-4 sm:p-6 rounded-2xl mb-6 sm:mb-8 min-w-0 overflow-hidden;
   background: var(--surface);
   border: 1px solid var(--border);
 }
@@ -658,11 +690,11 @@ body {
 }
 
 .skills-groups-grid {
-  @apply grid grid-cols-2 sm:grid-cols-5 gap-3;
+  @apply grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3;
 }
 
 .skill-group-card {
-  @apply flex items-center gap-2 p-3 rounded-lg;
+  @apply flex items-center gap-2 p-2.5 sm:p-3 rounded-lg min-w-0;
   background: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -672,16 +704,20 @@ body {
 }
 
 .skill-group-label {
-  @apply text-xs font-mono text-gray-400;
+  @apply text-xs font-mono text-gray-400 truncate;
 }
 
 /* ── Journey ── */
 .about-hero {
-  @apply grid md:grid-cols-[auto_1fr] gap-8 items-center;
+  @apply grid md:grid-cols-[auto_1fr] gap-6 sm:gap-8 items-center justify-items-center md:justify-items-start text-center md:text-left;
+}
+
+.about-hero-text {
+  @apply min-w-0 w-full;
 }
 
 .about-avatar-wrap {
-  @apply relative w-48 h-48 sm:w-56 sm:h-56;
+  @apply relative w-40 h-40 sm:w-48 sm:h-48 md:w-56 md:h-56 shrink-0;
 }
 
 .about-avatar-ring {
@@ -701,24 +737,24 @@ body {
 }
 
 .about-meta {
-  @apply flex items-center gap-2 text-sm text-gray-400 mt-3;
+  @apply flex flex-wrap items-center justify-center md:justify-start gap-x-2 gap-y-1 text-xs sm:text-sm text-gray-400 mt-3;
 }
 
 .journey-timeline {
-  @apply relative pl-8 space-y-8;
+  @apply relative pl-6 sm:pl-8 space-y-6 sm:space-y-8 min-w-0;
 }
 
 .journey-line {
-  @apply absolute left-[15px] top-2 bottom-2 w-px;
+  @apply absolute left-[11px] sm:left-[15px] top-2 bottom-2 w-px;
   background: linear-gradient(to bottom, #22d3ee, #a78bfa, transparent);
 }
 
 .journey-item {
-  @apply relative flex gap-5;
+  @apply relative flex gap-3 sm:gap-5 min-w-0;
 }
 
 .journey-node {
-  @apply absolute -left-8 w-8 h-8 rounded-lg flex items-center justify-center shrink-0;
+  @apply absolute -left-6 sm:-left-8 w-7 h-7 sm:w-8 sm:h-8 rounded-lg flex items-center justify-center shrink-0;
   border: 1px solid;
 }
 
@@ -739,13 +775,13 @@ body {
 }
 
 .journey-card {
-  @apply flex-1 p-5 rounded-xl;
+  @apply flex-1 p-4 sm:p-5 rounded-xl min-w-0;
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .journey-card-header {
-  @apply flex items-center gap-3 mb-2;
+  @apply flex flex-wrap items-center gap-2 sm:gap-3 mb-2;
 }
 
 .journey-year {
@@ -797,11 +833,11 @@ body {
 }
 
 .footer-inner {
-  @apply relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12;
+  @apply relative mx-auto max-w-7xl px-3 sm:px-6 lg:px-8 py-10 sm:py-12 min-w-0;
 }
 
 .footer-grid {
-  @apply grid grid-cols-1 md:grid-cols-4 gap-10;
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10;
 }
 
 .footer-tagline {
@@ -817,7 +853,13 @@ body {
 }
 
 .footer-link {
-  @apply flex items-center gap-2 text-sm text-gray-400 hover:text-cyan-300 transition-colors;
+  @apply flex items-start sm:items-center gap-2 text-sm text-gray-400 hover:text-cyan-300 transition-colors min-w-0 break-words;
+  overflow-wrap: anywhere;
+}
+
+.footer-hint {
+  @apply break-words;
+  overflow-wrap: anywhere;
 }
 
 .footer-hint code {

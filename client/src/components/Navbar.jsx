@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <motion.nav
       ref={menuRef}
-      className="navbar fixed top-0 w-full z-50"
+      className="navbar fixed top-0 w-full z-50 max-w-[100vw] overflow-x-clip"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -50,11 +50,11 @@ const Navbar = () => {
           />
         </Link>
 
-        <div className="hidden lg:flex flex-1 justify-center">
+        <div className="hidden lg:flex flex-1 justify-center min-w-0 px-2">
           <SearchDialog />
         </div>
 
-        <div className="hidden md:flex items-center gap-1 ml-auto lg:ml-0">
+        <div className="hidden lg:flex items-center gap-0.5 shrink-0">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -67,13 +67,9 @@ const Navbar = () => {
               {link.label}
             </Link>
           ))}
-
-          <div className="lg:hidden ml-1">
-            <SearchDialog iconOnly />
-          </div>
         </div>
 
-        <div className="flex md:hidden items-center ml-auto gap-1">
+        <div className="flex lg:hidden items-center ml-auto gap-0.5 shrink-0">
           <SearchDialog iconOnly />
           <button
             className="p-2 text-gray-400 hover:text-cyan-400 transition-colors"
@@ -92,7 +88,7 @@ const Navbar = () => {
 
       {isMenuOpen && (
         <motion.div
-          className="md:hidden mobile-menu"
+          className="lg:hidden mobile-menu"
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}

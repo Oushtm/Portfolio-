@@ -141,7 +141,7 @@ const GitHubLive = () => {
             transition={{ delay: i * 0.06 }}
             whileHover={{ y: -4 }}
           >
-            <div className="flex items-start justify-between gap-2">
+            <div className="flex items-start justify-between gap-2 min-w-0">
               <span className="repo-name">{repo.name}</span>
               <ExternalLink className="w-3.5 h-3.5 text-gray-500 shrink-0" />
             </div>

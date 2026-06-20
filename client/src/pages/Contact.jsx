@@ -181,7 +181,7 @@ const Contact = () => {
   const progressPct = (countdown / PENDING_DURATION) * 100;
 
   return (
-    <div className="min-h-screen pt-16 sm:pt-20 px-4 max-w-6xl mx-auto pb-16 sm:pb-20">
+    <div className="page-container contact-page">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -194,7 +194,7 @@ const Contact = () => {
           transition={{ duration: 0.8 }}
         >
           <MessageSquare className="w-7 h-7 sm:w-8 sm:h-8" />
-          <h2 className="text-3xl sm:text-4xl font-bold gradient-text">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold gradient-text">
             Get in Touch
           </h2>
         </motion.div>
@@ -232,7 +232,7 @@ const Contact = () => {
                           <p className="text-xs sm:text-sm text-gray-400">
                             {info.label}
                           </p>
-                          <p className="text-sm sm:text-base text-white">
+                          <p className="text-sm sm:text-base text-white break-all">
                             {info.value}
                           </p>
                         </div>
@@ -244,7 +244,7 @@ const Contact = () => {
                           <p className="text-xs sm:text-sm text-gray-400">
                             {info.label}
                           </p>
-                          <p className="text-sm sm:text-base text-white">
+                          <p className="text-sm sm:text-base text-white break-all">
                             {info.value}
                           </p>
                         </div>
@@ -309,7 +309,7 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="bg-gray-800/50 p-6 sm:p-8 rounded-xl backdrop-blur-sm"
+            className="bg-gray-800/50 p-4 sm:p-6 md:p-8 rounded-xl backdrop-blur-sm min-w-0"
           >
             <h3 className="text-lg sm:text-xl font-semibold mb-6">
               Send a Message
@@ -411,12 +411,12 @@ const Contact = () => {
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm"
+                  className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm break-words"
                 >
                   Failed to send message. Please try emailing directly at{" "}
                   <a
                     href={`mailto:${CONTACT_INFO.email}`}
-                    className="underline hover:text-red-300"
+                    className="underline hover:text-red-300 break-all"
                   >
                     {CONTACT_INFO.email}
                   </a>
@@ -452,10 +452,10 @@ const Contact = () => {
                     className="border border-amber-500/30 bg-amber-500/5 rounded-xl p-4"
                   >
                     {/* Header */}
-                    <div className="flex items-center justify-between mb-3">
-                      <div className="flex items-center gap-2 text-amber-400">
-                        <Timer className="w-4 h-4 shrink-0" />
-                        <span className="text-sm font-medium">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mb-3">
+                      <div className="flex items-start sm:items-center gap-2 text-amber-400 min-w-0">
+                        <Timer className="w-4 h-4 shrink-0 mt-0.5 sm:mt-0" />
+                        <span className="text-sm font-medium break-words">
                           Sending in {countdown}s — you can still edit or cancel
                         </span>
                       </div>
@@ -475,7 +475,7 @@ const Contact = () => {
                     </div>
 
                     {/* Data preview */}
-                    <div className="grid grid-cols-2 gap-2 mb-4 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4 text-sm">
                       <div className="bg-white/5 rounded-lg px-3 py-2">
                         <p className="text-gray-400 text-xs mb-0.5">Name</p>
                         <p className="text-white truncate">

@@ -115,14 +115,14 @@ const SearchDialog = ({ iconOnly = false }) => {
           className="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity"
           onClick={() => setIsOpen(false)}
         />
-        <div className="inline-block w-full max-w-2xl mt-24 text-left align-middle transition-all transform">
-          <div className="relative bg-gray-900 rounded-xl shadow-2xl">
-            <div className="flex items-center px-4 border-b border-white/10">
+        <div className="inline-block w-full max-w-2xl mt-16 sm:mt-24 px-1 text-left align-middle transition-all transform">
+          <div className="relative bg-gray-900 rounded-xl shadow-2xl overflow-hidden">
+            <div className="flex items-center px-3 sm:px-4 border-b border-white/10 min-w-0">
               <Search className="w-5 h-5 text-gray-400" />
               <input
                 type="text"
                 placeholder="Search pages..."
-                className="w-full px-4 py-4 text-white bg-transparent border-0 focus:outline-none focus:ring-0"
+                className="w-full min-w-0 px-3 sm:px-4 py-3 sm:py-4 text-sm sm:text-base text-white bg-transparent border-0 focus:outline-none focus:ring-0"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 autoFocus
@@ -142,7 +142,7 @@ const SearchDialog = ({ iconOnly = false }) => {
                   {results.map((result, index) => (
                     <button
                       key={result.path}
-                      className={`w-full px-4 py-3 text-left hover:bg-white/5 flex items-center justify-between ${
+                      className={`w-full px-3 sm:px-4 py-3 text-left hover:bg-white/5 flex items-center justify-between gap-3 min-w-0 ${
                         index === selectedIndex ? "bg-white/10" : ""
                       }`}
                       onClick={() => {
@@ -150,16 +150,16 @@ const SearchDialog = ({ iconOnly = false }) => {
                         setIsOpen(false);
                       }}
                     >
-                      <div>
-                        <div className="text-white font-medium">
+                      <div className="min-w-0 flex-1">
+                        <div className="text-white font-medium truncate">
                           {result.title}
                         </div>
-                        <div className="text-sm text-gray-400">
+                        <div className="text-sm text-gray-400 line-clamp-2">
                           {result.description}
                         </div>
                       </div>
                       <ArrowRight
-                        className={`w-4 h-4 text-gray-400 ${
+                        className={`w-4 h-4 text-gray-400 shrink-0 ${
                           index === selectedIndex ? "opacity-100" : "opacity-0"
                         }`}
                       />

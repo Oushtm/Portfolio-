@@ -71,7 +71,7 @@ const Home = () => (
         <p className="font-mono text-cyan-400/60 text-sm">
           // ready to collaborate?
         </p>
-        <h3 className="text-2xl font-bold mt-2">
+        <h3 className="text-xl sm:text-2xl font-bold mt-2">
           Let&apos;s build something remarkable.
         </h3>
         <MagneticButton to="/contact" className="btn-primary mt-6">

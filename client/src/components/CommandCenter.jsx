@@ -229,7 +229,7 @@ const CommandCenter = () => {
             <span className="dot dot-yellow" />
             <span className="dot dot-green" />
           </div>
-          <span className="font-mono text-xs text-cyan-400/70 tracking-widest">
+          <span className="command-center-header-title">
             oushtm ~ command-center
           </span>
           <span className="font-mono text-[10px] text-emerald-400/60 ml-auto hidden sm:block">

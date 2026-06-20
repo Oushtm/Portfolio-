@@ -5,8 +5,8 @@ import { ScrollAnimation } from "@/components/ScrollAnimation";
 
 const NotFound = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
-      <div className="text-center max-w-2xl mx-auto relative z-10">
+    <div className="min-h-screen flex items-center justify-center px-3 sm:px-4 overflow-x-clip">
+      <div className="text-center max-w-2xl mx-auto relative z-10 w-full min-w-0 overflow-hidden">
         <ScrollAnimation>
           <motion.div
             className="relative"
@@ -15,7 +15,7 @@ const NotFound = () => {
             transition={{ duration: 0.5 }}
           >
             <motion.div
-              className="text-[12rem] font-bold leading-none gradient-text"
+              className="text-[clamp(4rem,22vw,12rem)] font-bold leading-none gradient-text"
               animate={{ y: [0, -20, 0], rotate: [0, -5, 5, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
             >
@@ -32,7 +32,7 @@ const NotFound = () => {
 
         <ScrollAnimation>
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
@@ -43,7 +43,7 @@ const NotFound = () => {
 
         <ScrollAnimation>
           <motion.p
-            className="text-gray-400 mb-8 text-lg"
+            className="text-gray-400 mb-8 text-base sm:text-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
@@ -70,7 +70,7 @@ const NotFound = () => {
         </ScrollAnimation>
 
         <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200%] h-[200%] -z-10 pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[min(100vw,48rem)] aspect-square -z-10 pointer-events-none overflow-hidden"
           animate={{
             background: [
               "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 50%)",
